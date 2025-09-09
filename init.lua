@@ -277,6 +277,7 @@ require("lazy").setup({
       { "<leader>p", function() require("fzf-lua").files() end, desc = "Fuzzy-find files using fzf" },
       { "<leader>r", function() require('fzf-lua').resume() end, desc = "Resume last fzf picker view" },
       { "<leader>b", function() require('fzf-lua').buffers() end, desc = "Fuzzy search open buffers" },
+      { "<leader>e", function() require('fzf-lua').diagnostics_document() end, desc = "Show LSP diagnostics for the current buffer" },
     },
   },
 
