@@ -35,7 +35,7 @@ end, { expr = true, noremap = true })
 vim.opt.clipboard:append { "unnamed", "unnamedplus" }  -- Use system clipboard by default
 vim.opt.hlsearch = true                                -- Highlight matches while searching
 vim.opt.ignorecase = true                              -- Ignore case while searching, by default
-vim.opt.is = true                                      -- Enable incremental search by default
+vim.opt.incsearch = true                               -- Enable incremental search by default
 vim.opt.number = true                                  -- Enable line numbers
 vim.opt.rnu = true                                     -- Make the line numbers relative
 
