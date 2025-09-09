@@ -33,9 +33,16 @@ end, { expr = true, noremap = true })
 --- OPTIONS
 ----------------------------------------------------------------------------------
 vim.opt.clipboard:append { "unnamed", "unnamedplus" }  -- Use system clipboard by default
+
 vim.opt.hlsearch = true                                -- Highlight matches while searching
 vim.opt.ignorecase = true                              -- Ignore case while searching, by default
 vim.opt.incsearch = true                               -- Enable incremental search by default
+
+vim.opt.expandtab = true                               -- Use spaces by default instead of tabs
+vim.opt.tabstop = 4                                    -- How wide a tab looks when displayed
+vim.opt.shiftwidth = 4                                 -- How many spaces to indent by
+vim.opt.softtabstop = 4                                -- How many spaces to insert when pressing TAB
+
 vim.opt.number = true                                  -- Enable line numbers
 vim.opt.rnu = true                                     -- Make the line numbers relative
 
