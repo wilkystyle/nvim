@@ -357,21 +357,3 @@ vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                             -- 
 vim.keymap.set("n", "<leader>mw",
   "<cmd>silent w !pandoc --quiet -c ~/code/toolbag/markdown.css -f 'gfm+hard_line_breaks' -t html5 --mathjax --highlight-style pygments --standalone -o ~/.pandoc_html_output.html - && open ~/.pandoc_html_output.html<cr>",
   {})
-
-
-----------------------------------------------------------------------------------
---- LSP
-----------------------------------------------------------------------------------
-vim.lsp.config('pylsp', {
-  cmd = {'pylsp'},
-  filetypes = {'python'},
-  root_markers = {'.git'},
-})
-vim.lsp.enable('pylsp')
-
-vim.lsp.config('rust-analyzer', {
-  cmd = {'rust-analyzer'},
-  filetypes = {'rust'},
-  root_markers = {'.git'},
-})
-vim.lsp.enable('rust-analyzer')
