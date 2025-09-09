@@ -261,9 +261,6 @@ require("lazy").setup({
 
   {
     "ibhagwan/fzf-lua",
-    opts = {
-      fzf_colors = false,
-    },
     dependencies = {
       "junegunn/fzf",                 -- Provide easy installation of fzf binary within Neovim
       "nvim-tree/nvim-web-devicons",  -- optional icons
