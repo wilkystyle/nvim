@@ -268,6 +268,7 @@ require("lazy").setup({
     keys = {
       { "gd", function() require("fzf-lua").lsp_definitions() end, desc = "Goto LSP definitions using fzf" },
       { "grr", function() require("fzf-lua").lsp_references() end, desc = "Goto LSP references using fzf" },
+      { "<leader>t", function() require("fzf-lua").grep({ search = "^ *(class|def) _? -- *.py", no_esc=true, rg_glob=true }) end, desc = "grep/fuzzy-find in project with fzf" },
       { "<leader>f", function() require("fzf-lua").live_grep() end, desc = "(rip)grep in project with fzf" },
       { "<leader>h", function() require("fzf-lua").helptags() end, desc = "Fuzzy search Neovim help topics with fzf" },
       { "<leader>l", function() require('fzf-lua').blines({previewer = false}) end, desc = "Fuzzy find lines in current buffer with fzf" },
