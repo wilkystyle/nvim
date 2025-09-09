@@ -325,6 +325,17 @@ require("lazy").setup({
     end,
   },
 
+  {
+    "j-hui/fidget.nvim",
+    config = function()
+      require('fidget').setup({
+	progress = {
+	  ignore = { "pylsp" }  -- pylsp has noisy linter notifications
+	}
+      })
+    end
+  }
+
 })
 
 
