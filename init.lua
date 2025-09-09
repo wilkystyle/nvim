@@ -323,6 +323,7 @@ require("lazy").setup({
           "sql",
           "vim",
           "vimdoc",
+          "yaml",
         },
         highlight = {
           enable = true,
