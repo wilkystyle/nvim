@@ -90,7 +90,7 @@ require("lazy").setup({
       { "<leader>gh", "<cmd>Gclog! -256 % | copen | only<cr>" },
       { "<leader>gl", "<cmd>Gclog! -256 | copen | only<cr>" },
       { "<leader>gp", "<cmd>Git push<cr>" },
-      { "<leader>gs", "<cmd>MikeGitStatus<cr>" },
+      { "<leader>gs", "<cmd>Git | only<cr>" },
     }
   },
 
