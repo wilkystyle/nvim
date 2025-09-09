@@ -91,6 +91,7 @@ require("lazy").setup({
 
   {
     "tpope/vim-fugitive",
+    cmd = "Git",
     keys = {
       { "<leader>gb", "<cmd>Git blame<cr>" },
       { "<leader>gf", "<cmd>!git fullup<cr>" },
