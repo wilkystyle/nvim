@@ -368,6 +368,22 @@ require("lazy").setup({
     end,
   },
 
+  {
+    "stevearc/aerial.nvim",
+    keys = {
+      { "<leader>a", "<cmd>Telescope aerial<CR>" }
+    },
+    config = function()
+      -- Go to symbol in current file
+      require("aerial").setup({
+        -- Was using the default, but it seemed to be slow to come up on some Python
+        -- files with many functions. Trying this to see if using only the treesitter
+        -- backend is faster.
+        backends = { "treesitter" },
+      })
+    end
+  },
+
 })
 
 
