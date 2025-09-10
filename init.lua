@@ -67,7 +67,7 @@ require("lazy").setup({
     "stevearc/oil.nvim",
     opts = {},
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    lazy = false,
+    lazy = false,  -- Or else you can't do `:e .` and have it load Oil
     keys = {
       { "<leader>j", "<cmd>Oil<cr>" }
     },
@@ -111,8 +111,8 @@ require("lazy").setup({
 
   {
     "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = false,     -- We want the theme to be immediately available!
+    priority = 1000,  -- Load the theme before any other plugins
     config = function()
       require("tokyonight").setup({
         on_colors = function(colors)
@@ -362,7 +362,7 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     branch = 'master',
-    lazy = false,
+    lazy = false,  -- We want treesitter highlighting to be available immediately for all applicable filetypes
     build = ":TSUpdate",
     config = function()
       require 'nvim-treesitter.configs'.setup {
