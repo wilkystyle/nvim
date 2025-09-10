@@ -441,7 +441,7 @@ require("lazy").setup({
   {
     "stevearc/aerial.nvim",
     keys = {
-      { "<leader>a", "<cmd>Telescope aerial<CR>" }
+      { "<leader>a", function() require("telescope").extensions.aerial.aerial() end }
     },
     config = function()
       -- Go to symbol in current file
