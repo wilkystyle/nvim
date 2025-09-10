@@ -311,6 +311,9 @@ require("lazy").setup({
 
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-context",
+    },
     branch = 'master',
     lazy = false,
     build = ":TSUpdate",
