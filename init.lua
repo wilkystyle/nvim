@@ -266,23 +266,65 @@ require("lazy").setup({
   },
 
   {
-    "ibhagwan/fzf-lua",
+    'nvim-telescope/telescope.nvim',
     dependencies = {
-      "junegunn/fzf",                 -- Provide easy installation of fzf binary within Neovim
-      "nvim-tree/nvim-web-devicons",  -- optional icons
+      'nvim-lua/plenary.nvim',
+      "nvim-telescope/telescope-live-grep-args.nvim",
     },
+    -- opts = {
+    -- },
     keys = {
-      { "gd", function() require("fzf-lua").lsp_definitions() end, desc = "Goto LSP definitions using fzf" },
-      { "grr", function() require("fzf-lua").lsp_references() end, desc = "Goto LSP references using fzf" },
-      { "<leader>t", function() require("fzf-lua").grep({ search = "^ *(class|def) _? -- *.py", no_esc=true, rg_glob=true }) end, desc = "grep/fuzzy-find in project with fzf" },
-      { "<leader>f", function() require("fzf-lua").live_grep() end, desc = "(rip)grep in project with fzf" },
-      { "<leader>h", function() require("fzf-lua").helptags() end, desc = "Fuzzy search Neovim help topics with fzf" },
-      { "<leader>l", function() require('fzf-lua').blines({previewer = false}) end, desc = "Fuzzy find lines in current buffer with fzf" },
-      { "<leader>p", function() require("fzf-lua").files() end, desc = "Fuzzy-find files using fzf" },
-      { "<leader>r", function() require('fzf-lua').resume() end, desc = "Resume last fzf picker view" },
-      { "<leader>b", function() require('fzf-lua').buffers() end, desc = "Fuzzy search open buffers" },
-      { "<leader>e", function() require('fzf-lua').diagnostics_document() end, desc = "Show LSP diagnostics for the current buffer" },
+      { "<leader>p", function() require("telescope.builtin").find_files() end },
+      { "<leader>f", function() require('telescope').extensions.live_grep_args.live_grep_args() end },
+      { "<leader>F", function() require('telescope').extensions.live_grep_args.live_grep_args({default_text=vim.fn.expand('<cWORD>')}) end },
+      { "<leader>l", function() require("telescope.builtin").current_buffer_fuzzy_find() end },
+      { "<leader>r", function() require("telescope.builtin").resume() end },
+      { "<leader>b", function() require("telescope.builtin").buffers() end },
+      { "<leader>e", function() require("telescope.builtin").diagnostics() end },
+      { "<leader>h", function() require("telescope.builtin").help_tags() end },
+      { "<leader>gz", function() require("telescope.builtin").git_stash() end },
+      { "<leader>t", function() require('telescope').extensions.live_grep_args.live_grep_args({default_text='^ *(class|def) .{0,2}'}) end },
     },
+    config = function()
+      require("telescope").setup({
+        pickers = {
+          find_files = { hidden = true }, -- Include hidden files in the file picker.
+        },
+
+        defaults = {
+          -- Patterns to ignore when using the file picker
+          file_ignore_patterns = {
+            "^.git/",
+          },
+
+          -- Hide previewer when picker starts
+          preview = {
+            hide_on_startup = true
+          },
+
+          mappings = {
+            i = {
+              ['<C-\\>'] = require('telescope.actions.layout').toggle_preview,
+              ["<C-k>"] = require('telescope-live-grep-args.actions').quote_prompt({ postfix = " -g *." }),
+              ['<C-j>'] = require('telescope.actions').to_fuzzy_refine,
+            }
+          },
+
+          vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--hidden',   -- Search hidden files during live_grep (still respecting ignore files).
+            '-g', '!.git' -- Because we rarely add .git to a .gitignore, we account for it here.
+          },
+        },
+        require("telescope").load_extension("live_grep_args")
+      })
+    end,
   },
 
   {
