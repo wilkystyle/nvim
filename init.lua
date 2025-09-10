@@ -311,9 +311,6 @@ require("lazy").setup({
 
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-context",
-    },
     branch = 'master',
     lazy = false,
     build = ":TSUpdate",
@@ -340,6 +337,26 @@ require("lazy").setup({
         },
       }
     end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    config = function()
+      require 'treesitter-context'.setup({
+        enable = true,
+        line_numbers = true,
+        max_lines = 5,
+        min_window_height = 0,
+        mode = 'cursor',
+        multiline_threshold = 20,
+        on_attach = nil,
+        separator = "-",
+        trim_scope = 'outer',
+        zindex = 20,
+      })
+      vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
+      vim.api.nvim_set_hl(0, "TreesitterContextSeparator", { link = "LineNr" })
+    end
   },
 
   {
