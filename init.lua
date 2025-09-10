@@ -350,6 +350,24 @@ require("lazy").setup({
     end
   },
 
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup({
+        -- Use `:help formatters` to see a list of builtin formatters
+        formatters_by_ft = {
+          python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+          terraform = { "tofu_fmt" },
+        },
+        format_on_save = {
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 1000,
+        },
+      })
+    end,
+  },
+
 })
 
 
