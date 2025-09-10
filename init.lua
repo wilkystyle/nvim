@@ -271,8 +271,6 @@ require("lazy").setup({
       'nvim-lua/plenary.nvim',
       "nvim-telescope/telescope-live-grep-args.nvim",
     },
-    -- opts = {
-    -- },
     keys = {
       { "<leader>b", function() require("telescope.builtin").buffers() end },
       { "<leader>e", function() require("telescope.builtin").diagnostics() end },
