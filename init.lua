@@ -274,16 +274,19 @@ require("lazy").setup({
     -- opts = {
     -- },
     keys = {
-      { "<leader>p", function() require("telescope.builtin").find_files() end },
-      { "<leader>f", function() require('telescope').extensions.live_grep_args.live_grep_args() end },
-      { "<leader>F", function() require('telescope').extensions.live_grep_args.live_grep_args({default_text=vim.fn.expand('<cWORD>')}) end },
-      { "<leader>l", function() require("telescope.builtin").current_buffer_fuzzy_find() end },
-      { "<leader>r", function() require("telescope.builtin").resume() end },
       { "<leader>b", function() require("telescope.builtin").buffers() end },
       { "<leader>e", function() require("telescope.builtin").diagnostics() end },
-      { "<leader>h", function() require("telescope.builtin").help_tags() end },
+      { "<leader>f", function() require('telescope').extensions.live_grep_args.live_grep_args() end },
+      { "<leader>F", function() require('telescope').extensions.live_grep_args.live_grep_args({default_text=vim.fn.expand('<cWORD>')}) end },
       { "<leader>gz", function() require("telescope.builtin").git_stash() end },
+      { "<leader>h", function() require("telescope.builtin").help_tags() end },
+      { "<leader>l", function() require("telescope.builtin").current_buffer_fuzzy_find() end },
+      { "<leader>p", function() require("telescope.builtin").find_files() end },
+      { "<leader>r", function() require("telescope.builtin").resume() end },
       { "<leader>t", function() require('telescope').extensions.live_grep_args.live_grep_args({default_text='^ *(class|def) .{0,2}'}) end },
+      { "gd", "<cmd>Telescope lsp_definitions<cr>" },
+      { "grr", "<cmd>Telescope lsp_references<cr>" },
+      { "grt", "<cmd>Telescope lsp_type_definitions<cr>" },
     },
     config = function()
       require("telescope").setup({
@@ -344,10 +347,17 @@ require("lazy").setup({
 
   {
     "mason-org/mason-lspconfig.nvim",
+    lazy = false,  -- Or it won't attach an LSP server and start indexing when you open a file
     opts = {},
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
       "neovim/nvim-lspconfig",
+    },
+    keys = {
+      { "<f2>", "<cmd>lua vim.lsp.buf.rename()<cr>" },
+      { "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>" },
+      { "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>" },
+      { "K", "<cmd>lua vim.lsp.buf.hover()<cr>" },
     },
   },
 
