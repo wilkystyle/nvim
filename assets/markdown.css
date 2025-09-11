@@ -1,0 +1,76 @@
+body {
+  font-family: arial, sans-serif;
+  font-size: .875rem;
+  padding: 4px;
+  line-height: 1.2em;
+}
+
+pre {
+  font-family: monospace;
+  background-color: #F6F8FA;
+  border: 0.5px solid black;
+  border-radius: 4px;
+  overflow: wrap;
+  padding: 5px;
+}
+
+:not(pre) > code {
+  font-family: monospace;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  padding: 1px 2px;
+}
+
+blockquote {
+  color: #555555;
+  font-style: italic;
+  border-left: 5px solid #c4d4ed;
+  margin: 10px;
+  padding: 10px;
+}
+
+ol > li {
+  padding-left: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: .8rem;
+  margin: 10px 0;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.verbatim {
+  color: #267de0;
+  background-color: #f2f7ff;
+}
+
+.TODO {
+  padding: 3px;
+  color: white;
+  background-color: orange;
+}
+
+.DONE {
+  padding: 3px;
+  color: white;
+  background-color: green;
+}

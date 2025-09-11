@@ -498,6 +498,11 @@ vim.keymap.set({ "n", "v" }, "<C-j>", "6gj", {})                            -- M
 vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                            -- Move up by 6 lines
 
 -- Render Markdown output with Pandoc
-vim.keymap.set("n", "<leader>mw",
-  "<cmd>silent w !pandoc --quiet -c ~/code/toolbag/markdown.css -f 'gfm+hard_line_breaks' -t html5 --mathjax --highlight-style pygments --standalone -o ~/.pandoc_html_output.html - && open ~/.pandoc_html_output.html<cr>",
-  {})
+vim.keymap.set("n", "<leader>mw", function()
+  local css = vim.fn.stdpath("config") .. "/assets/markdown.css"
+  local cmd = string.format(
+    "silent w !pandoc --quiet -c %s -f 'gfm+hard_line_breaks' -t html5 --mathjax --highlight-style pygments --standalone -o ~/.pandoc_html_output.html - && open ~/.pandoc_html_output.html",
+    vim.fn.shellescape(css)
+  )
+  vim.cmd(cmd)
+end, { desc = "Export Markdown to HTML with Pandoc" })
