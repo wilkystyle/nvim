@@ -15,8 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 ----------------------------------------------------------------------------------
 --- ANNOYANCES
 ----------------------------------------------------------------------------------
-vim.opt.backup = false       -- No backup file, part 1
-vim.opt.writebackup = false  -- No backup file, part 2
+vim.opt.backup = false      -- No backup file, part 1
+vim.opt.writebackup = false -- No backup file, part 2
 
 -- Add a jump to the jumplist via m' when using k with a count.
 vim.keymap.set('n', 'k', function()
@@ -32,21 +32,21 @@ end, { expr = true, noremap = true })
 ----------------------------------------------------------------------------------
 --- OPTIONS
 ----------------------------------------------------------------------------------
-vim.opt.clipboard:append { "unnamed", "unnamedplus" }  -- Use system clipboard by default
+vim.opt.clipboard:append { "unnamed", "unnamedplus" } -- Use system clipboard by default
 
-vim.opt.hlsearch = true                                -- Highlight matches while searching
-vim.opt.ignorecase = true                              -- Ignore case while searching, by default
-vim.opt.incsearch = true                               -- Enable incremental search by default
+vim.opt.hlsearch = true                               -- Highlight matches while searching
+vim.opt.ignorecase = true                             -- Ignore case while searching, by default
+vim.opt.incsearch = true                              -- Enable incremental search by default
 
-vim.opt.expandtab = true                               -- Use spaces by default instead of tabs
-vim.opt.tabstop = 4                                    -- How wide a tab looks when displayed
-vim.opt.shiftwidth = 4                                 -- How many spaces to indent by
-vim.opt.softtabstop = 4                                -- How many spaces to insert when pressing TAB
+vim.opt.expandtab = true                              -- Use spaces by default instead of tabs
+vim.opt.tabstop = 4                                   -- How wide a tab looks when displayed
+vim.opt.shiftwidth = 4                                -- How many spaces to indent by
+vim.opt.softtabstop = 4                               -- How many spaces to insert when pressing TAB
 
-vim.opt.number = true                                  -- Enable line numbers
-vim.opt.rnu = true                                     -- Make the line numbers relative
+vim.opt.number = true                                 -- Enable line numbers
+vim.opt.rnu = true                                    -- Make the line numbers relative
 
-vim.g.mapleader = " "                                  -- Set space as the leader key
+vim.g.mapleader = " "                                 -- Set space as the leader key
 
 
 ----------------------------------------------------------------------------------
@@ -59,15 +59,15 @@ vim.api.nvim_create_autocmd('BufReadCmd', { pattern = '*.whl', command = 'call z
 --- PLUGINS
 ----------------------------------------------------------------------------------
 require("lazy").setup({
-  { "cohama/lexima.vim" },                -- Auto-pairing of characters
-  { "michaeljsmith/vim-indent-object" },  -- Indentation as a vim text object
-  { "scrooloose/nerdtree" },              -- Nerdtree: Sidebar for browsing files
+  { "cohama/lexima.vim" },               -- Auto-pairing of characters
+  { "michaeljsmith/vim-indent-object" }, -- Indentation as a vim text object
+  { "scrooloose/nerdtree" },             -- Nerdtree: Sidebar for browsing files
 
   {
     "stevearc/oil.nvim",
     opts = {},
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    lazy = false,  -- Or else you can't do `:e .` and have it load Oil
+    lazy = false, -- Or else you can't do `:e .` and have it load Oil
     keys = {
       { "<leader>j", "<cmd>Oil<cr>" }
     },
@@ -111,8 +111,8 @@ require("lazy").setup({
 
   {
     "folke/tokyonight.nvim",
-    lazy = false,     -- We want the theme to be immediately available!
-    priority = 1000,  -- Load the theme before any other plugins
+    lazy = false,    -- We want the theme to be immediately available!
+    priority = 1000, -- Load the theme before any other plugins
     config = function()
       require("tokyonight").setup({
         on_colors = function(colors)
@@ -275,14 +275,24 @@ require("lazy").setup({
       { "<leader>b", function() require("telescope.builtin").buffers() end },
       { "<leader>e", function() require("telescope.builtin").diagnostics() end },
       { "<leader>f", function() require('telescope').extensions.live_grep_args.live_grep_args() end },
-      { "<leader>F", function() require('telescope').extensions.live_grep_args.live_grep_args({default_text=vim.fn.expand('<cWORD>')}) end },
+      { "<leader>F", function()
+        require('telescope').extensions.live_grep_args.live_grep_args({
+          default_text = vim.fn
+              .expand('<cWORD>')
+        })
+      end },
       { "<leader>gz", function() require("telescope.builtin").git_stash() end },
-      { "<leader>h", function() require("telescope.builtin").help_tags() end },
-      { "<leader>l", function() require("telescope.builtin").current_buffer_fuzzy_find() end },
-      { "<leader>p", function() require("telescope.builtin").find_files() end },
-      { "<leader>r", function() require("telescope.builtin").resume() end },
-      { "<leader>t", function() require('telescope').extensions.live_grep_args.live_grep_args({default_text='^ *(class|def) .{0,2}'}) end },
-      { "gd", "<cmd>Telescope lsp_definitions<cr>" },
+      { "<leader>h",  function() require("telescope.builtin").help_tags() end },
+      { "<leader>l",  function() require("telescope.builtin").current_buffer_fuzzy_find() end },
+      { "<leader>p",  function() require("telescope.builtin").find_files() end },
+      { "<leader>r",  function() require("telescope.builtin").resume() end },
+      { "<leader>t", function()
+        require('telescope').extensions.live_grep_args.live_grep_args({
+          default_text =
+          '^ *(class|def) .{0,2}'
+        })
+      end },
+      { "gd",  "<cmd>Telescope lsp_definitions<cr>" },
       { "grr", "<cmd>Telescope lsp_references<cr>" },
       { "grt", "<cmd>Telescope lsp_type_definitions<cr>" },
     },
@@ -331,8 +341,8 @@ require("lazy").setup({
   {
     'jpalardy/vim-slime',
     keys = {
-      {"g<cr>", "<Plug>SlimeParagraphSend"},
-      {"g<cr>", "<Plug>SlimeRegionSend", mode="v" },
+      { "g<cr>", "<Plug>SlimeParagraphSend" },
+      { "g<cr>", "<Plug>SlimeRegionSend",   mode = "v" },
     },
     init = function()
       vim.g.slime_no_mappings = 1
@@ -345,7 +355,7 @@ require("lazy").setup({
 
   {
     "mason-org/mason-lspconfig.nvim",
-    lazy = false,  -- Or it won't attach an LSP server and start indexing when you open a file
+    lazy = false, -- Or it won't attach an LSP server and start indexing when you open a file
     opts = {},
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
@@ -353,16 +363,16 @@ require("lazy").setup({
     },
     keys = {
       { "<f2>", "<cmd>lua vim.lsp.buf.rename()<cr>" },
-      { "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>" },
-      { "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>" },
-      { "K", "<cmd>lua vim.lsp.buf.hover()<cr>" },
+      { "[d",   "<cmd>lua vim.diagnostic.goto_prev()<cr>" },
+      { "]d",   "<cmd>lua vim.diagnostic.goto_next()<cr>" },
+      { "K",    "<cmd>lua vim.lsp.buf.hover()<cr>" },
     },
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
     branch = 'master',
-    lazy = false,  -- We want treesitter highlighting to be available immediately for all applicable filetypes
+    lazy = false, -- We want treesitter highlighting to be available immediately for all applicable filetypes
     build = ":TSUpdate",
     config = function()
       require 'nvim-treesitter.configs'.setup {
@@ -414,7 +424,7 @@ require("lazy").setup({
     config = function()
       require('fidget').setup({
         progress = {
-          ignore = { "pylsp" }  -- pylsp has noisy linter notifications
+          ignore = { "pylsp" } -- pylsp has noisy linter notifications
         }
       })
     end
@@ -476,16 +486,16 @@ require("lazy").setup({
 ----------------------------------------------------------------------------------
 --- KEYBINDINGS
 ----------------------------------------------------------------------------------
-vim.keymap.set("i", "<c-f>", "<right>", {})                                  -- Make ctrl-f move one character forward in insert mode.
-vim.keymap.set("n", "<leader>W", "<cmd>let @+ = expand(\"%:p\")<cr>", {})    -- Copy the full path to the current file
-vim.keymap.set("n", "<leader>w", "<cmd>let @+ = expand(\"%:~:.\")<cr>", {})  -- Copy path to current file, relative to repo root
-vim.keymap.set("n", "[q", "<cmd>cprev<cr>", {})                              -- Previous quickfix item
-vim.keymap.set("n", "]q", "<cmd>cnext<cr>", {})                              -- Next quickfix item
-vim.keymap.set("n", "Y", "yy", {})                                           -- Yank whole line when pressing shift-y
-vim.keymap.set("n", "ZA", "<cmd>qa!<cr>", {})                                -- Entirely quit Neovim, discarding all changes, without confirmation
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })              -- Allow pressing Esc in the Neovim terminal to return to normal mode
-vim.keymap.set({ "n", "v" }, "<C-j>", "6gj", {})                             -- Move down by 6 lines
-vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                             -- Move up by 6 lines
+vim.keymap.set("i", "<c-f>", "<right>", {})                                 -- Make ctrl-f move one character forward in insert mode.
+vim.keymap.set("n", "<leader>W", "<cmd>let @+ = expand(\"%:p\")<cr>", {})   -- Copy the full path to the current file
+vim.keymap.set("n", "<leader>w", "<cmd>let @+ = expand(\"%:~:.\")<cr>", {}) -- Copy path to current file, relative to repo root
+vim.keymap.set("n", "[q", "<cmd>cprev<cr>", {})                             -- Previous quickfix item
+vim.keymap.set("n", "]q", "<cmd>cnext<cr>", {})                             -- Next quickfix item
+vim.keymap.set("n", "Y", "yy", {})                                          -- Yank whole line when pressing shift-y
+vim.keymap.set("n", "ZA", "<cmd>qa!<cr>", {})                               -- Entirely quit Neovim, discarding all changes, without confirmation
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })             -- Allow pressing Esc in the Neovim terminal to return to normal mode
+vim.keymap.set({ "n", "v" }, "<C-j>", "6gj", {})                            -- Move down by 6 lines
+vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                            -- Move up by 6 lines
 
 -- Render Markdown output with Pandoc
 vim.keymap.set("n", "<leader>mw",
