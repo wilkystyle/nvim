@@ -13,4 +13,8 @@ git clone https://www.github.com/wilkystyle/nvim ~/.config/nvim
 ## Usage
 On first launch, the Lazy.nvim package manager will install plugins and compile Treesitter parsers.
 
-Next you can optionally run `:Mason` and install LSP servers for any languages you plan to work in. I mostly work in Python, so I install `pylsp` and `ruff` (Note: not `ruff-lsp`, which is deprecated). Because my configuration uses `mason-lspconfig`, you don't need to do anything else. Mason will automatically enable any LSP servers you install.
+### Optional: Install LSP servers with Mason
+1. Run `:Mason`
+2. Choose LSP servers to install
+
+That's all you need to do. This configuration uses [mason-lspconfig](https://github.com/mason-org/mason-lspconfig.nvim), which will automatically enable any installed LSP servers.
