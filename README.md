@@ -2,7 +2,7 @@
 
 ## Prerequisites
 - `nvim` 0.11.4-ish (definitely doesn't work on <0.10.0)
-- `gcc` for compiling Treesitter parser binaries
+- A compiler + dev headers/libraries for compiling Treesitter parser binaries (e.g. `apt install build-essential` on Ubuntu)
 
 ## Installation
 ```bash
