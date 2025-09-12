@@ -26,7 +26,7 @@ git clone https://www.github.com/wilkystyle/nvim %LOCALAPPDATA%\nvim
 
 
 ## Usage
-On first launch, the [Lazy.nvim]() package manager will install plugins and compile Treesitter parsers.
+On first launch, the [Lazy.nvim](https://github.com/folke/lazy.nvim) package manager will install plugins and compile Treesitter parsers.
 
 **Optional: Install LSP servers with Mason**
 1. Run `:Mason`
