@@ -10,7 +10,7 @@
 ## Installation
 **Linux/macOS**
 ```bash
-mkdir ~/.config
+mkdir -p ~/.config
 git clone https://www.github.com/wilkystyle/nvim ~/.config/nvim
 ```
 
