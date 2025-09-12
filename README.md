@@ -8,18 +8,18 @@
 
 
 ## Installation
-### Linux/macOS
+**Linux/macOS**
 ```bash
 mkdir ~/.config
 git clone https://www.github.com/wilkystyle/nvim ~/.config/nvim
 ```
 
-### Windows (PowerShell):
+**Windows (PowerShell):**
 ```powershell
 git clone https://www.github.com/wilkystyle/nvim $env:LOCALAPPDATA\nvim
 ```
 
-### Windows (Command Prompt/cmd.exe):
+**Windows (Command Prompt/cmd.exe):**
 ```
 git clone https://www.github.com/wilkystyle/nvim %LOCALAPPDATA%\nvim
 ```
@@ -28,7 +28,7 @@ git clone https://www.github.com/wilkystyle/nvim %LOCALAPPDATA%\nvim
 ## Usage
 On first launch, the [Lazy.nvim]() package manager will install plugins and compile Treesitter parsers.
 
-### Optional: Install LSP servers with Mason
+**Optional: Install LSP servers with Mason**
 1. Run `:Mason`
 2. Choose LSP servers to install
 
