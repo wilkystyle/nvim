@@ -17,6 +17,9 @@ vim.opt.rtp:prepend(lazypath)
 ----------------------------------------------------------------------------------
 vim.opt.backup = false      -- No backup file, part 1
 vim.opt.writebackup = false -- No backup file, part 2
+vim.opt.shada = ""          -- No ShaDa (Shared Data) file
+vim.opt.swapfile = false    -- Don't write swapfiles
+vim.opt.undofile = false    -- Don't write an undofile
 
 -- Add a jump to the jumplist via m' when using k with a count.
 vim.keymap.set('n', 'k', function()
