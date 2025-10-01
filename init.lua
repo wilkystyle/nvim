@@ -481,7 +481,64 @@ require("lazy").setup({
       fuzzy = { implementation = "prefer_rust_with_warning" }
     },
     opts_extend = { "sources.default" }
-  }
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "mfussenegger/nvim-dap-python",
+      "rcarriga/nvim-dap-ui",  -- Nice UI for interfacing with the debugger
+      "nvim-neotest/nvim-nio", -- Required for nvim-dap-ui
+    },
+    config = function()
+      require("dap").configurations.python = {
+        {
+          console = "integratedTerminal",
+          justMyCode = false,
+          name = "Launch file",
+          program = "${file}",
+          request = "launch",
+          type = "python",
+          args = { "--no-cov" }
+        }
+      }
+
+      -- Setup DAP UI (optional)
+      require("dapui").setup()
+
+      -- Setup Python debugging
+      require("dap-python").setup()
+
+      -- Auto-open/close DAP UI
+      require("dap").listeners.after.event_initialized["dapui_config"] = function()
+        require("dapui").open()
+      end
+      require("dap").listeners.before.event_terminated["dapui_config"] = function()
+        require("dapui").close()
+      end
+      require("dap").listeners.before.event_exited["dapui_config"] = function()
+        require("dapui").close()
+      end
+    end,
+
+    -- Key mappings (optional)
+    keys = {
+      { '<F10>',            function() require("dap").step_over() end },
+      { '<F11>',            function() require("dap").step_into() end },
+      { '<F12>',            function() require("dap").step_out() end },
+      { '<F6>',             function() require("dap").toggle_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
+      { '<F7>',             function() require("dap").clear_breakpoints() end },
+      { '<F9>',             function() require("dapui").toggle({ reset = true }) end },
+      { '<leader>d<enter>', function() require("dap").run_to_cursor() end },
+      { '<leader>d<Esc>',   function() require("dap").terminate() end },
+      { '<leader>dd',       function() require("dap").continue() end },
+      { '<leader>di',       function() require("dapui").eval() end },
+      { '<leader>dp',       function() require("dap").pause() end },
+      { '<leader>dr',       function() require("dap").repl.toggle() end },
+      { '<leader>dt',       function() require('dap-python').test_method({ config = { justMyCode = false, args = { "--no-cov" } } }) end },
+      { '<leader>dw',       function() require("dapui").elements.watches.add() end },
+    }
+  },
 
 })
 
