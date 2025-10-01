@@ -499,7 +499,6 @@ require("lazy").setup({
           program = "${file}",
           request = "launch",
           type = "python",
-          args = { "--no-cov" }
         }
       }
 
@@ -535,7 +534,7 @@ require("lazy").setup({
       { '<leader>di',       function() require("dapui").eval() end },
       { '<leader>dp',       function() require("dap").pause() end },
       { '<leader>dr',       function() require("dap").repl.toggle() end },
-      { '<leader>dt',       function() require('dap-python').test_method({ config = { justMyCode = false, args = { "--no-cov" } } }) end },
+      { '<leader>dt',       function() require('dap-python').test_method({ config = { justMyCode = false } }) end },
       { '<leader>dw',       function() require("dapui").elements.watches.add() end },
     }
   },
