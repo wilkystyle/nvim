@@ -477,8 +477,10 @@ require("lazy").setup({
       completion = {
         documentation = { auto_show = true },
         list = {
-          preselect = false,
-          auto_insert = false,
+          selection = {
+            preselect = false,
+            auto_insert = false,
+          },
         },
       },
       sources = {
