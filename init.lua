@@ -55,7 +55,8 @@ vim.g.mapleader = " "                                 -- Set space as the leader
 ----------------------------------------------------------------------------------
 --- AUTOCMDS
 ----------------------------------------------------------------------------------
-vim.api.nvim_create_autocmd('BufReadCmd', { pattern = '*.whl', command = 'call zip#Browse(expand("<amatch>"))' })
+vim.api.nvim_create_autocmd('BufReadCmd', { pattern = '*.whl', command = 'call zip#Browse(expand("<amatch>"))' }) -- Browse .whl files like .zip
+vim.api.nvim_create_autocmd('BufWritePre', { pattern = '', command = ":%s/\\s\\+$//e" })                          -- Delete trailing spaces on save
 
 
 ----------------------------------------------------------------------------------
