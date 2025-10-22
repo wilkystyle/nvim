@@ -357,21 +357,6 @@ require("lazy").setup({
     end,
   },
 
-  {
-    "mason-org/mason-lspconfig.nvim",
-    lazy = false, -- Or it won't attach an LSP server and start indexing when you open a file
-    opts = {},
-    dependencies = {
-      { "mason-org/mason.nvim", opts = {} },
-      "neovim/nvim-lspconfig",
-    },
-    keys = {
-      { "<f2>", "<cmd>lua vim.lsp.buf.rename()<cr>" },
-      { "[d",   "<cmd>lua vim.diagnostic.goto_prev()<cr>" },
-      { "]d",   "<cmd>lua vim.diagnostic.goto_next()<cr>" },
-      { "K",    "<cmd>lua vim.lsp.buf.hover()<cr>" },
-    },
-  },
 
   {
     "nvim-treesitter/nvim-treesitter",
@@ -549,6 +534,21 @@ require("lazy").setup({
   },
 
 })
+
+
+----------------------------------------------------------------------------------
+--- LSP CONFIGURATION
+----------------------------------------------------------------------------------
+vim.lsp.config['ruff']={cmd={'ruff', 'server'}, filetypes={'python'}, root_markers={'.git', '.venv', 'pyproject.toml', 'setup.py'}}
+vim.lsp.config['ty']={cmd={'ty', 'server'}, filetypes={'python'}, root_markers={'.git', '.venv', 'pyproject.toml', 'setup.py'}, settings={ty={experimental={rename=true}}}}
+
+vim.lsp.enable({'ruff', 'ty'})
+
+-- LSP keybindings
+vim.keymap.set("n", "<f2>", vim.lsp.buf.rename, {})
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {})
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {})
+vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 
 
 ----------------------------------------------------------------------------------
