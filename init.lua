@@ -500,6 +500,9 @@ require("lazy").setup({
       "nvim-neotest/nvim-nio", -- Required for nvim-dap-ui
     },
     config = function()
+      require("dapui").setup()
+
+      require("dap-python").setup()
       require("dap").configurations.python = {
         {
           console = "integratedTerminal",
@@ -509,13 +512,7 @@ require("lazy").setup({
           request = "launch",
           type = "python",
         }
-      }
-
-      -- Setup DAP UI (optional)
-      require("dapui").setup()
-
-      -- Setup Python debugging
-      require("dap-python").setup()
+      } -- Just a single config for Python
 
       -- Auto-open/close DAP UI
       require("dap").listeners.after.event_initialized["dapui_config"] = function()
