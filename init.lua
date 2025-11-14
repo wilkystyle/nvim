@@ -542,7 +542,7 @@ require("lazy").setup({
       { '<leader>d<enter>', function() require("dap").run_to_cursor() end },
       { '<leader>d<Esc>',   function() require("dap").terminate() end },
       { '<leader>dd',       function() require("dap").continue() end },
-      { '<leader>di',       function() require("dapui").eval() end },
+      { '<leader>di',       function() require("dapui").eval() end,                                                 mode = { "n", "v" } },
       { '<leader>dp',       function() require("dap").pause() end },
       { '<leader>dr',       function() require("dap").repl.toggle() end },
       { '<leader>dt',       function() require('dap-python').test_method({ config = { justMyCode = false } }) end },
