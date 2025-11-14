@@ -384,6 +384,8 @@ require("lazy").setup({
         ensure_installed = {
           "bash",
           "c",
+          "dockerfile",
+          "javascript",
           "lua",
           "markdown",
           "markdown_inline",
@@ -391,6 +393,7 @@ require("lazy").setup({
           "query",
           "rust",
           "sql",
+          "typescript",
           "vim",
           "vimdoc",
           "yaml",
