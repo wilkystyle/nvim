@@ -393,6 +393,7 @@ require("lazy").setup({
           "query",
           "rust",
           "sql",
+          "toml",
           "typescript",
           "vim",
           "vimdoc",
