@@ -462,11 +462,8 @@ require("lazy").setup({
       { "<leader>a", function() require("telescope").extensions.aerial.aerial() end }
     },
     config = function()
-      -- Go to symbol in current file
       require("aerial").setup({
-        -- Was using the default, but it seemed to be slow to come up on some Python
-        -- files with many functions. Trying this to see if using only the treesitter
-        -- backend is faster.
+        -- Use treesitter as the sole backend for maximum speed
         backends = { "treesitter" },
       })
     end
