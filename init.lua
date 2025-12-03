@@ -293,7 +293,7 @@ require("lazy").setup({
       { "<leader>t", function()
         require('telescope').extensions.live_grep_args.live_grep_args({
           default_text =
-          '^ *(class|def) .{0,2}'
+          '^ *(class|def|async def) .{0,2}'
         })
       end },
       { "gd",  "<cmd>Telescope lsp_definitions<cr>" },
