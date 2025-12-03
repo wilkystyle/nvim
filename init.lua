@@ -466,6 +466,15 @@ require("lazy").setup({
         -- Use treesitter as the sole backend for maximum speed
         backends = { "treesitter" },
       })
+
+      -- Make sure symbols appear in the list in the same order they appear in the file
+      require("telescope").setup({
+        extensions = {
+          aerial = {
+            sorting_strategy = "descending",
+          },
+        },
+      })
     end
   },
 
