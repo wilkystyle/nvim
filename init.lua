@@ -444,12 +444,13 @@ require("lazy").setup({
       require("conform").setup({
         -- Use `:help formatters` to see a list of builtin formatters
         formatters_by_ft = {
+          go = { "gofmt" },
           python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
           terraform = { "tofu_fmt" },
         },
         format_on_save = {
-          lsp_fallback = true,
           async = false,
+          lsp_fallback = true,
           timeout_ms = 1000,
         },
       })
