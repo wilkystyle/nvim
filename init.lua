@@ -506,16 +506,17 @@ require("lazy").setup({
   {
     "mfussenegger/nvim-dap",
     dependencies = {
-      "mfussenegger/nvim-dap-python",
-      "rcarriga/nvim-dap-ui",  -- Nice UI for interfacing with the debugger
-      "nvim-neotest/nvim-nio", -- Required for nvim-dap-ui
+      "rcarriga/nvim-dap-ui",         -- Nice UI for interfacing with the debugger
+      "nvim-neotest/nvim-nio",        -- Required for nvim-dap-ui
+      "leoluz/nvim-dap-go",           -- Debugger configuration for Golang
+      "mfussenegger/nvim-dap-python", -- Debugger configuration for Python
     },
     config = function()
       require("dapui").setup()
 
+      -- Python-specific configuration
       require("dap-python").setup()
       require('dap-python').test_runner = 'pytest'
-
       require("dap").configurations.python = {
         {
           console = "integratedTerminal",
@@ -525,7 +526,7 @@ require("lazy").setup({
           request = "launch",
           type = "python",
         }
-      } -- Just a single config for Python
+      }
 
       -- Auto-open/close DAP UI
       require("dap").listeners.after.event_initialized["dapui_config"] = function()
@@ -553,7 +554,10 @@ require("lazy").setup({
       { '<leader>di',       function() require("dapui").eval() end,                                                 mode = { "n", "v" } },
       { '<leader>dp',       function() require("dap").pause() end },
       { '<leader>dr',       function() require("dap").repl.toggle() end },
-      { '<leader>dt',       function() require('dap-python').test_method({ config = { justMyCode = false } }) end },
+
+      { '<leader>dt',       function() require('dap-python').test_method({ config = { justMyCode = false } }) end,  ft = "python" },
+      { '<leader>dt',       function() require('dap-go').debug_test() end,                                          ft = "go" },
+
       { '<leader>dw',       function() require("dapui").elements.watches.add() end },
     }
   },
