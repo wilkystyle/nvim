@@ -351,7 +351,7 @@ require("lazy").setup({
       persist_size = false,
     },
     keys = {
-      { '<M-o>', "<Cmd>wincmd w<CR>", mode = { "n", "v", "i", "t" }, desc = "Select window to the left" },
+      { '<C-]>', "<Cmd>wincmd w<CR>", mode = { "n", "v", "i", "t" }, desc = "Cycle through open windows" },
       {
         '<C-\\>',
         function() require("toggleterm").toggle() end,
