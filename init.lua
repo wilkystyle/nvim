@@ -349,6 +349,7 @@ require("lazy").setup({
       direction = "vertical",
       size = vim.o.columns * 0.5,
       persist_size = false,
+      shade_terminals = false,
     },
     keys = {
       { '<C-]>', "<Cmd>wincmd w<CR>", mode = { "n", "v", "i", "t" }, desc = "Cycle through open windows" },
