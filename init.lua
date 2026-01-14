@@ -21,12 +21,12 @@ vim.opt.shada = ""          -- No ShaDa (Shared Data) file
 vim.opt.swapfile = false    -- Don't write swapfiles
 vim.opt.undofile = false    -- Don't write an undofile
 
--- Add a jump to the jumplist via m' when using k with a count.
+-- Add a jump to the jumplist via m' when using k with a count
 vim.keymap.set('n', 'k', function()
   return (vim.v.count > 1 and "m'" .. vim.v.count or '') .. 'k'
 end, { expr = true, noremap = true })
 
--- Add a jump to the jumplist via m' when using j with a count.
+-- Add a jump to the jumplist via m' when using j with a count
 vim.keymap.set('n', 'j', function()
   return (vim.v.count > 1 and "m'" .. vim.v.count or '') .. 'j'
 end, { expr = true, noremap = true })
@@ -51,6 +51,7 @@ vim.opt.rnu = true                                    -- Make the line numbers r
 
 vim.opt.wrap = true                                   -- Soft-wrapping of lines
 vim.opt.linebreak = true                              -- Wrap lines at whole words, not individual characters
+
 vim.g.mapleader = " "                                 -- Set space as the leader key
 
 
@@ -488,7 +489,7 @@ vim.lsp.config('ty', { settings = { ['ty'] = { experimental = { rename = true } 
 ----------------------------------------------------------------------------------
 --- KEYBINDINGS
 ----------------------------------------------------------------------------------
-vim.keymap.set("i", "<c-f>", "<right>", {})                                 -- Make ctrl-f move one character forward in insert mode.
+vim.keymap.set("i", "<c-f>", "<right>", {})                                 -- Make ctrl-f move one character forward in insert mode
 vim.keymap.set("n", "<leader>W", "<cmd>let @+ = expand(\"%:p\")<cr>", {})   -- Copy the full path to the current file
 vim.keymap.set("n", "<leader>w", "<cmd>let @+ = expand(\"%:~:.\")<cr>", {}) -- Copy path to current file, relative to repo root
 vim.keymap.set("n", "[q", "<cmd>cprev<cr>", {})                             -- Previous quickfix item
