@@ -217,6 +217,15 @@ require("lazy").setup({
       "junegunn/fzf",                -- Provide easy installation of fzf binary within Neovim
       "nvim-tree/nvim-web-devicons", -- optional icons
     },
+    config = function()
+      require("fzf-lua").setup({
+        keymap = {
+          fzf = {
+            ["ctrl-q"] = "select-all+accept",
+          }
+        },
+      })
+    end,
     keys = {
       { "gd",        function() require("fzf-lua").lsp_definitions() end,                                                             desc = "Goto LSP definitions using fzf" },
       { "grr",       function() require("fzf-lua").lsp_references() end,                                                              desc = "Goto LSP references using fzf" },
