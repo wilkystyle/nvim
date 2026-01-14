@@ -49,6 +49,8 @@ vim.opt.softtabstop = 4                               -- How many spaces to inse
 vim.opt.number = true                                 -- Enable line numbers
 vim.opt.rnu = true                                    -- Make the line numbers relative
 
+vim.opt.wrap = true                                   -- Soft-wrapping of lines
+vim.opt.linebreak = true                              -- Wrap lines at whole words, not individual characters
 vim.g.mapleader = " "                                 -- Set space as the leader key
 
 
