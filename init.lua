@@ -244,41 +244,18 @@ require("lazy").setup({
   },
 
   {
-    'akinsho/toggleterm.nvim',
-    version = "*",
-    opts = {
-      direction = "vertical",
-      size = vim.o.columns * 0.5,
-      persist_size = false,
-      shade_terminals = false,
-    },
+    'jpalardy/vim-slime',
     keys = {
-      { '<C-]>', "<Cmd>wincmd w<CR>", mode = { "n", "v", "i", "t" }, desc = "Cycle through open windows" },
-      {
-        '<C-\\>',
-        function() require("toggleterm").toggle() end,
-        mode = { "n", "v", "i", "t" },
-        desc = "Toggle the terminal window",
-      },
-      {
-        "<leader><cr>",
-        function() require("toggleterm").send_lines_to_terminal("visual_selection", false, { args = vim.v.count }) end, -- The boolean is for whether to trim spaces
-        mode = { "v" },
-        desc = "Send visual selection to terminal",
-      },
-      {
-        "<leader><cr>",
-        function()
-          _G.toggleterm_opfunc = function(motion_type)
-            require("toggleterm").send_lines_to_terminal(motion_type, true, { args = vim.v.count })
-          end
-          vim.go.operatorfunc = "v:lua.toggleterm_opfunc"
-          vim.api.nvim_feedkeys("g@ip", "n", false)
-        end,
-        mode = "n",
-        desc = "Send paragraph to terminal",
-      },
+      { "g<cr>", "<Plug>SlimeParagraphSend" },
+      { "g<cr>", "<Plug>SlimeRegionSend",   mode = "v" },
     },
+    init = function()
+      vim.g.slime_no_mappings = 1
+      vim.g.slime_target = "tmux"
+      vim.g.slime_dont_ask_default = 1
+      vim.g.slime_bracketed_paste = 1
+      vim.g.slime_default_config = { socket_name = 'default', target_pane = '{last}' }
+    end,
   },
 
   {
