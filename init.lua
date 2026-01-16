@@ -246,8 +246,8 @@ require("lazy").setup({
   {
     'jpalardy/vim-slime',
     keys = {
-      { "g<cr>", "<Plug>SlimeParagraphSend" },
-      { "g<cr>", "<Plug>SlimeRegionSend",   mode = "v" },
+      { "<leader><cr>", "<Plug>SlimeParagraphSend" },
+      { "<leader><cr>", "<Plug>SlimeRegionSend",   mode = "v" },
     },
     init = function()
       vim.g.slime_no_mappings = 1
