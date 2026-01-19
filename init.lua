@@ -227,6 +227,9 @@ require("lazy").setup({
             ["ctrl-q"] = "select-all+accept",
           }
         },
+        grep = {
+          hidden = true
+        },
       })
     end,
     keys = {
