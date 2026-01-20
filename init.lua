@@ -480,6 +480,18 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })             -- A
 vim.keymap.set({ "n", "v" }, "<C-j>", "6gj", {})                            -- Move down by 6 lines
 vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                            -- Move up by 6 lines
 
+-- Open a terminal in a side split, in the same directory as the current buffer
+vim.keymap.set('n', '<leader>`', function()
+  local dir = require("oil").get_current_dir() or vim.fn.expand('%:p:h')
+  local shell = vim.fn.has('win32') == 1 and 'powershell' or ''
+  if string.match(dir, "fugitive://") then
+    vim.cmd('vsplit | wincmd w | terminal ' .. shell)
+  else
+    vim.cmd('vsplit | wincmd w | lcd ' .. vim.fn.fnameescape(dir) .. ' | terminal ' .. shell)
+  end
+  vim.cmd('startinsert')
+end, { desc = "Open a terminal in a side split, in the same directory as the current buffer" })
+
 -- Render Markdown output with Pandoc
 vim.keymap.set("n", "<leader>mw", function()
   local css = vim.fn.stdpath("config") .. "/assets/markdown.css"
