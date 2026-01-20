@@ -124,7 +124,7 @@ require("lazy").setup({
       require("tokyonight").setup({
         on_colors = function(colors)
           -- Set base colors from your Emacs theme
-          colors.bg = "#1D1F23"      -- bg
+          colors.bg = "#1a120e"      -- bg
           colors.bg_dark = "#242837" -- bg-alt
 
           colors.fg = "#EFEFEF"      -- fg
@@ -133,16 +133,17 @@ require("lazy").setup({
 
         on_highlights = function(highlights, colors)
           -- Core syntax elements matching your Emacs theme
-          highlights.String = { fg = "#EDCB66" }   -- yellow
-          highlights.Function = { fg = "#9DD274" } -- green
-          highlights.Keyword = { fg = "#FF7A90" }  -- magenta
-          highlights.Constant = { fg = "#BB9CF7" } -- violet
-          highlights.Number = { fg = "#f78c6c" }   -- orange
-          highlights.Boolean = { fg = "#BB9CF7" }  -- violet (matching constants)
-          highlights.Operator = { fg = "#85DAFB" } -- cyan
-          highlights.Type = { fg = "#85DAFB" }     -- cyan
-          highlights.Variable = { fg = "#85DAFB" } -- cyan
-          highlights.Comment = { fg = "#788494" }  -- comment-grey
+          highlights.String = { fg = "#EDCB66" }          -- yellow
+          highlights.Function = { fg = "#9DD274" }        -- green
+          highlights.Keyword = { fg = "#FF7A90" }         -- magenta
+          highlights.Constant = { fg = "#BB9CF7" }        -- violet
+          highlights.Number = { fg = "#f78c6c" }          -- orange
+          highlights.Boolean = { fg = "#BB9CF7" }         -- violet (matching constants)
+          highlights.Operator = { fg = "#85DAFB" }        -- cyan
+          highlights.Type = { fg = "#85DAFB" }            -- cyan
+          highlights.Variable = { fg = "#85DAFB" }        -- cyan
+          highlights.Comment = { fg = "#788494" }         -- comment-grey
+          highlights.StatusLine = { fg = colors.fg_dark } -- comment-grey
 
           -- Add highlighting for variable members/properties
           highlights["@variable.member"] = { fg = "#85DAFB" }  -- cyan
@@ -152,8 +153,10 @@ require("lazy").setup({
           highlights["@constant.builtin"] = { fg = "#BB9CF7" } -- purple
 
           -- Line numbers
-          highlights.LineNr = { fg = "#4E5579" }       -- base4
-          highlights.CursorLineNr = { fg = "#BFC7D5" } -- fg-alt
+          highlights.LineNr = { fg = colors.fg_dark }
+          highlights.LineNrAbove = { fg = "#4E5579" }       -- base4
+          highlights.LineNrBelow = { fg = "#4E5579" }       -- base4
+          highlights.CursorLineNr = { fg = colors.fg_dark } -- fg-alt
 
           -- Current line highlight
           highlights.CursorLine = { bg = "#242837" } -- bg-alt
