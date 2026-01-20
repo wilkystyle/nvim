@@ -467,6 +467,11 @@ require("lazy").setup({
 --- ADDITIONAL LSP CONFIGURATION
 ----------------------------------------------------------------------------------
 vim.lsp.config('ty', { settings = { ['ty'] = { experimental = { rename = true } } } })
+vim.lsp.config('*', {
+  on_attach = function(client, _)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
+})
 
 
 ----------------------------------------------------------------------------------
