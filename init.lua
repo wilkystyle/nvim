@@ -125,50 +125,60 @@ require("lazy").setup({
         on_colors = function(colors)
           -- Set base colors from your Emacs theme
           colors.bg = "#1a120e"      -- bg
-          colors.bg_dark = "#242837" -- bg-alt
+          colors.bg_dark = "#432A1E" -- bg-alt
 
-          colors.fg = "#EFEFEF"      -- fg
-          colors.fg_dark = "#BFC7D5" -- fg-alt
+          colors.fg = "#F0DFD8"      -- fg
+          colors.fg_dark = "#D7C2BA" -- fg-alt
+
+          colors.comment_grey = "#7C7C7C"
+          colors.cyan = "#9EC3C4"
+          colors.dark_grey = "#4C4C4C"
+          colors.green = "#9EC49F"
+          colors.magenta = "#FFB4AB"
+          colors.orange = "#FFB694"
+          colors.purple = "#C49EC4"
+          colors.violet = "#A39EC4"
+          colors.yellow = "#C4C19E"
         end,
 
         on_highlights = function(highlights, colors)
           -- Core syntax elements matching your Emacs theme
-          highlights.String = { fg = "#EDCB66" }          -- yellow
-          highlights.Function = { fg = "#9DD274" }        -- green
-          highlights.Keyword = { fg = "#FF7A90" }         -- magenta
-          highlights.Constant = { fg = "#BB9CF7" }        -- violet
-          highlights.Number = { fg = "#f78c6c" }          -- orange
-          highlights.Boolean = { fg = "#BB9CF7" }         -- violet (matching constants)
-          highlights.Operator = { fg = "#85DAFB" }        -- cyan
-          highlights.Type = { fg = "#85DAFB" }            -- cyan
-          highlights.Variable = { fg = "#85DAFB" }        -- cyan
-          highlights.Comment = { fg = "#788494" }         -- comment-grey
-          highlights.StatusLine = { fg = colors.fg_dark } -- comment-grey
+          highlights.String = { fg = colors.yellow }        -- yellow
+          highlights.Function = { fg = colors.green }       -- green
+          highlights.Keyword = { fg = colors.magenta }      -- magenta
+          highlights.Constant = { fg = colors.violet }      -- violet
+          highlights.Number = { fg = colors.orange }        -- orange
+          highlights.Boolean = { fg = colors.violet }       -- violet (matching constants)
+          highlights.Operator = { fg = colors.cyan }        -- cyan
+          highlights.Type = { fg = colors.orange }          -- cyan
+          highlights.Variable = { fg = colors.orange }      -- cyan
+          highlights.Comment = { fg = colors.comment_grey } -- comment-grey
+          highlights.StatusLine = { fg = colors.fg_dark }   -- comment-grey
 
           -- Add highlighting for variable members/properties
-          highlights["@variable.member"] = { fg = "#85DAFB" }  -- cyan
-          highlights["@keyword.function"] = { fg = "#FF7A90" } -- magenta
-          highlights["@keyword.import"] = { fg = "#FF7A90" }   -- magenta
-          highlights["@module"] = { fg = "#85DAFB" }           -- cyan
-          highlights["@constant.builtin"] = { fg = "#BB9CF7" } -- purple
+          highlights["@variable.member"] = { fg = colors.orange }   -- cyan
+          highlights["@keyword.function"] = { fg = colors.magenta } -- magenta
+          highlights["@keyword.import"] = { fg = colors.magenta }   -- magenta
+          highlights["@module"] = { fg = colors.orange }            -- cyan
+          highlights["@constant.builtin"] = { fg = colors.purple }  -- purple
 
           -- Line numbers
           highlights.LineNr = { fg = colors.fg_dark }
-          highlights.LineNrAbove = { fg = "#4E5579" }       -- base4
-          highlights.LineNrBelow = { fg = "#4E5579" }       -- base4
-          highlights.CursorLineNr = { fg = colors.fg_dark } -- fg-alt
+          highlights.LineNrAbove = { fg = colors.dark_grey } -- base4
+          highlights.LineNrBelow = { fg = colors.dark_grey } -- base4
+          highlights.CursorLineNr = { fg = colors.fg_dark }  -- fg-alt
 
           -- Current line highlight
-          highlights.CursorLine = { bg = "#242837" } -- bg-alt
+          highlights.CursorLine = { bg = colors.bg } -- bg-alt
 
           -- Tab line customization
           highlights.TabLine = {
-            bg = colors.bg, -- bg
-            fg = "#4E5579"  -- base4
+            bg = colors.bg,       -- bg
+            fg = colors.dark_grey -- base4
           }
 
           highlights.TabLineSel = {
-            bg = "#242837", -- bg-alt for active tab
+            bg = colors.bg, -- bg-alt for active tab
             fg = colors.fg  -- fg for active tab text
           }
 
@@ -178,36 +188,36 @@ require("lazy").setup({
 
           -- Search highlights
           highlights.Search = {
-            bg = "#EDCB66", -- yellow
+            bg = colors.yellow,
             fg = colors.bg
           }
 
           highlights.CurSearch = {
-            bg = "#f78c6c", -- orange
+            bg = colors.orange, -- orange
             fg = colors.bg
           }
 
           highlights.IncSearch = {
-            bg = "#EDCB66", -- yellow
+            bg = colors.yellow,
             fg = colors.bg
           }
 
           -- Spelling highlights
           highlights.SpellBad = {
-            bg = "#DD7A90",
+            bg = colors.magenta, -- magenta
             fg = colors.bg,
           }
 
           highlights.SpellCap = {
-            bg = "#EDCB66",
+            bg = colors.yellow,
           }
 
           highlights.SpellRare = {
-            bg = "#BB9CF7",
+            bg = colors.cyan, -- cyan
           }
 
           highlights.SpellLocal = {
-            bg = "#85DAFB",
+            bg = colors.purple, -- purple
           }
         end
       })
