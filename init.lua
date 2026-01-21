@@ -124,11 +124,11 @@ require("lazy").setup({
       require("tokyonight").setup({
         on_colors = function(colors)
           -- Set base colors from your Emacs theme
-          colors.bg = "#1a120e"      -- bg
-          colors.bg_dark = "#432A1E" -- bg-alt
+          colors.bg = "#1a120e"
+          colors.bg_dark = "#432A1E"
 
-          colors.fg = "#F0DFD8"      -- fg
-          colors.fg_dark = "#D7C2BA" -- fg-alt
+          colors.fg = "#F0DFD8"
+          colors.fg_dark = "#D7C2BA"
 
           colors.comment_grey = "#7C7C7C"
           colors.cyan = "#9EC3C4"
@@ -142,58 +142,52 @@ require("lazy").setup({
         end,
 
         on_highlights = function(highlights, colors)
-          -- Core syntax elements matching your Emacs theme
-          highlights.String = { fg = colors.yellow }        -- yellow
-          highlights.Function = { fg = colors.green }       -- green
-          highlights.Keyword = { fg = colors.magenta }      -- magenta
-          highlights.Constant = { fg = colors.violet }      -- violet
-          highlights.Number = { fg = colors.orange }        -- orange
-          highlights.Boolean = { fg = colors.violet }       -- violet (matching constants)
-          highlights.Operator = { fg = colors.cyan }        -- cyan
-          highlights.Type = { fg = colors.orange }          -- cyan
-          highlights.Variable = { fg = colors.orange }      -- cyan
-          highlights.Comment = { fg = colors.comment_grey } -- comment-grey
-          highlights.StatusLine = { fg = colors.fg_dark }   -- comment-grey
+          highlights.String = { fg = colors.yellow }
+          highlights.Function = { fg = colors.green }
+          highlights.Keyword = { fg = colors.magenta }
+          highlights.Constant = { fg = colors.violet }
+          highlights.Number = { fg = colors.orange }
+          highlights.Boolean = { fg = colors.violet }
+          highlights.Operator = { fg = colors.cyan }
+          highlights.Type = { fg = colors.orange }
+          highlights.Variable = { fg = colors.orange }
+          highlights.Comment = { fg = colors.comment_grey }
+          highlights.StatusLine = { fg = colors.fg_dark }
 
-          -- Add highlighting for variable members/properties
-          highlights["@variable.member"] = { fg = colors.orange }   -- cyan
-          highlights["@keyword.function"] = { fg = colors.magenta } -- magenta
-          highlights["@keyword.import"] = { fg = colors.magenta }   -- magenta
-          highlights["@module"] = { fg = colors.orange }            -- cyan
-          highlights["@constant.builtin"] = { fg = colors.purple }  -- purple
+          highlights["@variable.member"] = { fg = colors.orange }
+          highlights["@keyword.function"] = { fg = colors.magenta }
+          highlights["@keyword.import"] = { fg = colors.magenta }
+          highlights["@module"] = { fg = colors.orange }
+          highlights["@constant.builtin"] = { fg = colors.purple }
 
-          -- Line numbers
           highlights.LineNr = { fg = colors.fg_dark }
-          highlights.LineNrAbove = { fg = colors.dark_grey } -- base4
-          highlights.LineNrBelow = { fg = colors.dark_grey } -- base4
-          highlights.CursorLineNr = { fg = colors.fg_dark }  -- fg-alt
+          highlights.LineNrAbove = { fg = colors.dark_grey }
+          highlights.LineNrBelow = { fg = colors.dark_grey }
+          highlights.CursorLineNr = { fg = colors.fg_dark }
 
-          -- Current line highlight
-          highlights.CursorLine = { bg = colors.bg } -- bg-alt
+          highlights.CursorLine = { bg = colors.bg }
 
-          -- Tab line customization
           highlights.TabLine = {
-            bg = colors.bg,       -- bg
-            fg = colors.dark_grey -- base4
+            bg = colors.bg,
+            fg = colors.dark_grey
           }
 
           highlights.TabLineSel = {
-            bg = colors.bg, -- bg-alt for active tab
-            fg = colors.fg  -- fg for active tab text
+            bg = colors.bg,
+            fg = colors.fg
           }
 
           highlights.TabLineFill = {
-            bg = colors.bg, -- bg
+            bg = colors.bg,
           }
 
-          -- Search highlights
           highlights.Search = {
             bg = colors.yellow,
             fg = colors.bg
           }
 
           highlights.CurSearch = {
-            bg = colors.orange, -- orange
+            bg = colors.orange,
             fg = colors.bg
           }
 
@@ -202,9 +196,8 @@ require("lazy").setup({
             fg = colors.bg
           }
 
-          -- Spelling highlights
           highlights.SpellBad = {
-            bg = colors.magenta, -- magenta
+            bg = colors.magenta,
             fg = colors.bg,
           }
 
@@ -213,16 +206,16 @@ require("lazy").setup({
           }
 
           highlights.SpellRare = {
-            bg = colors.cyan, -- cyan
+            bg = colors.cyan,
           }
 
           highlights.SpellLocal = {
-            bg = colors.purple, -- purple
+            bg = colors.purple,
           }
         end
       })
 
-      -- Make sure the color scheme is applied after all customizations
+      -- Load theme only after all customizations have been made
       vim.cmd.colorscheme("tokyonight-moon")
     end
   },
@@ -230,8 +223,8 @@ require("lazy").setup({
   {
     "ibhagwan/fzf-lua",
     dependencies = {
-      "junegunn/fzf",                -- Provide easy installation of fzf binary within Neovim
-      "nvim-tree/nvim-web-devicons", -- optional icons
+      "junegunn/fzf",
+      "nvim-tree/nvim-web-devicons",
     },
     config = function()
       require("fzf-lua").setup({
