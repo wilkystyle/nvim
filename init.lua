@@ -107,7 +107,7 @@ require("lazy").setup({
     cmd = "Git",
     keys = {
       { "<leader>gb", "<cmd>Git blame<cr>" },
-      { "<leader>gf", "<cmd>!git fullup<cr>" },
+      { "<leader>gf", "<cmd>Git fullup<cr>" },
       { "<leader>gh", "<cmd>Gclog! -256 % | copen | only<cr>" },
       { "<leader>gl", "<cmd>Gclog! -256 | copen | only<cr>" },
       { "<leader>gp", "<cmd>Git push<cr>" },
