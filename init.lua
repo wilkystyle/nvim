@@ -512,3 +512,19 @@ vim.keymap.set("n", "<leader>mw", function()
   )
   vim.cmd(cmd)
 end, { desc = "Export Markdown to HTML with Pandoc" })
+
+vim.keymap.set("n", "<leader>go", function()
+  local remote = vim.trim(vim.fn.system("git remote get-url origin"))
+  local commit = vim.trim(vim.fn.system("git rev-parse HEAD"))
+  local file = vim.fn.expand("%:~:.")
+  local line = vim.api.nvim_win_get_cursor(0)[1]
+  local parts = {}
+  for part in remote:gmatch("[^/:]+") do
+    table.insert(parts, part)
+  end
+  local repo = parts[#parts - 1] .. "/" .. parts[#parts]:gsub("%.git$", "")
+  local url = string.format("https://github.com/%s/blob/%s/%s#L%d", repo, commit, file, line)
+
+  local open_cmd = vim.fn.has('mac') == 1 and 'open' or 'xdg-open'
+  vim.fn.system(open_cmd .. " " .. vim.fn.shellescape(url))
+end)
