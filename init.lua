@@ -533,3 +533,11 @@ vim.keymap.set("n", "<leader>go", function()
   local open_cmd = vim.fn.has('mac') == 1 and 'open' or 'xdg-open'
   vim.fn.system(open_cmd .. " " .. vim.fn.shellescape(url))
 end)
+
+-- Stupid hack to make the message area not continue displaying a message if
+-- I'm done looking at it. Might delete later.
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+  callback = function()
+    vim.cmd("echo ''")
+  end,
+})
