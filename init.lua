@@ -35,6 +35,11 @@ end, { expr = true, noremap = true })
 ----------------------------------------------------------------------------------
 --- OPTIONS
 ----------------------------------------------------------------------------------
+vim.opt.laststatus = 0                                -- Don't show the statusline
+vim.opt.showmode = false                              -- Don't show the mode in the message area
+vim.opt.ruler = false                                 -- Don't show line,col or position in file
+vim.opt.shortmess:append("I")                         -- Don't show the intro screen
+
 vim.opt.clipboard:append { "unnamed", "unnamedplus" } -- Use system clipboard by default
 
 vim.opt.hlsearch = true                               -- Highlight matches while searching
