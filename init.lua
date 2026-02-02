@@ -2,6 +2,7 @@
 --- BOOTSTRAP LAZY.NVIM
 ----------------------------------------------------------------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git", "clone", "--filter=blob:none",
@@ -15,11 +16,15 @@ vim.opt.rtp:prepend(lazypath)
 ----------------------------------------------------------------------------------
 --- ANNOYANCES
 ----------------------------------------------------------------------------------
-vim.opt.backup = false      -- No backup file, part 1
-vim.opt.writebackup = false -- No backup file, part 2
-vim.opt.shada = ""          -- No ShaDa (Shared Data) file
-vim.opt.swapfile = false    -- Don't write swapfiles
-vim.opt.undofile = false    -- Don't write an undofile
+vim.g.loaded_python3_provider = 0     -- Disable unused Python provider (used for extensions written with Python)
+vim.g.loaded_perl_provider    = 0     -- Disable unused Perl provider (used for extensions written with Perl)
+vim.g.loaded_ruby_provider    = 0     -- Disable unused Ruby provider (used for extensions written with Ruby)
+vim.g.loaded_node_provider    = 0     -- Disable unused Node provider (used for extensions written with Node)
+vim.opt.backup                = false -- No backup file, part 1
+vim.opt.writebackup           = false -- No backup file, part 2
+vim.opt.shada                 = ""    -- No ShaDa (Shared Data) file
+vim.opt.swapfile              = false -- Don't write swapfiles
+vim.opt.undofile              = false -- Don't write an undofile
 
 -- Add a jump to the jumplist via m' when using k with a count
 vim.keymap.set('n', 'k', function()
