@@ -513,7 +513,10 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })             -- A
 vim.keymap.set({ "n", "v" }, "<C-j>", "6gj", {})                            -- Move down by 6 lines
 vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                            -- Move up by 6 lines
 
+
+---------------------------------------------------------------------------------
 -- Open a terminal in a side split, in the same directory as the current buffer
+---------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>`', function()
   local dir = require("oil").get_current_dir() or vim.fn.expand('%:p:h')
   local shell = vim.fn.has('win32') == 1 and 'powershell' or ''
@@ -525,16 +528,41 @@ vim.keymap.set('n', '<leader>`', function()
   vim.cmd('startinsert')
 end, { desc = "Open a terminal in a side split, in the same directory as the current buffer" })
 
--- Render Markdown output with Pandoc
-vim.keymap.set("n", "<leader>mw", function()
+
+---------------------------------------------------------------------------------
+-- Render either the whole buffer or the current visual selection as Markdown
+-- with Pandoc
+---------------------------------------------------------------------------------
+local function render_markdown_with_pandoc(start_line, end_line)
+  start_line = start_line or 1
+  end_line = end_line or vim.fn.line("$")
+  local range = start_line .. "," .. end_line
   local css = vim.fn.stdpath("config") .. "/assets/markdown.css"
   local cmd = string.format(
-    "silent w !pandoc --quiet -c %s -f 'gfm+hard_line_breaks' -t html5 --mathjax --highlight-style pygments --standalone -o ~/.pandoc_html_output.html - && open ~/.pandoc_html_output.html",
+    "silent %sw !pandoc --quiet -c %s -f 'gfm+hard_line_breaks' -t html5 --mathjax --highlight-style pygments --standalone -o ~/.pandoc_html_output.html - && open ~/.pandoc_html_output.html",
+    range,
     vim.fn.shellescape(css)
   )
   vim.cmd(cmd)
+end
+
+vim.keymap.set("n", "<leader>mw", function()
+  render_markdown_with_pandoc()
 end, { desc = "Export Markdown to HTML with Pandoc" })
 
+vim.keymap.set("v", "<leader>mw", function()
+  local start_line = vim.fn.line("v")
+  local end_line = vim.fn.line(".")
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+  render_markdown_with_pandoc(start_line, end_line)
+end, { desc = "Export selected Markdown lines to HTML with Pandoc" })
+
+
+---------------------------------------------------------------------------------
+-- Open permalink for current file/line number on GitHub
+---------------------------------------------------------------------------------
 vim.keymap.set("n", "<leader>go", function()
   local remote = vim.trim(vim.fn.system("git remote get-url origin"))
   local commit = vim.trim(vim.fn.system("git rev-parse HEAD"))
@@ -551,8 +579,11 @@ vim.keymap.set("n", "<leader>go", function()
   vim.fn.system(open_cmd .. " " .. vim.fn.shellescape(url))
 end)
 
+
+---------------------------------------------------------------------------------
 -- Stupid hack to make the message area not continue displaying a message if
 -- I'm done looking at it. Might delete later.
+---------------------------------------------------------------------------------
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
   callback = function()
     vim.cmd("echo ''")
