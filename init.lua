@@ -406,7 +406,10 @@ require("lazy").setup({
     dependencies = { 'rafamadriz/friendly-snippets' },
     version = '1.*',
     opts = {
-      keymap = { preset = 'super-tab' },
+      keymap = {
+        preset = 'super-tab',
+        ['<C-f>'] = {}, -- Disable Blink's <C-f> mapping. I use it to move one char forward in Insert mode.
+      },
       appearance = { nerd_font_variant = 'mono' },
       completion = {
         documentation = { auto_show = true },
