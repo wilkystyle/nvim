@@ -412,6 +412,9 @@ require("lazy").setup({
       },
       appearance = { nerd_font_variant = 'mono' },
       completion = {
+        accept = {
+          auto_brackets = { enabled = false },
+        },
         documentation = { auto_show = true },
         list = {
           selection = {
