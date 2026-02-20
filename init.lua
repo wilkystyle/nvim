@@ -443,7 +443,7 @@ require("lazy").setup({
       require("dapui").setup()
 
       -- Python-specific configuration
-      require("dap-python").setup()
+      require("dap-python").setup("uv")
       require('dap-python').test_runner = 'pytest'
       require("dap").configurations.python = {
         {
