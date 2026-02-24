@@ -443,7 +443,7 @@ require("lazy").setup({
       require("dapui").setup()
 
       -- Python-specific configuration
-      require("dap-python").setup("uv")
+      require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
       require('dap-python').test_runner = 'pytest'
       require("dap").configurations.python = {
         {
