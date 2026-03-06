@@ -1,9 +1,21 @@
+-- Turn word/selection into a link
 vim.keymap.set('n', '<leader>mk', [[ciW[<c-r>"]()<left>]])
+vim.keymap.set('v', '<leader>mk', [[c[<c-r>"]()<left>]])
+
+-- Make word/selection bold
 vim.keymap.set('n', '<leader>mb', [[ciW**<c-r>"**<esc>]])
+vim.keymap.set('v', '<leader>mb', [[c**<c-r>"**<esc>]])
+
+-- Make word/selection italicized
 vim.keymap.set('n', '<leader>mi', [[ciW*<c-r>"*<esc>]])
+vim.keymap.set('v', '<leader>mi', [[c*<c-r>"*<esc>]])
+
+-- Make word/selection an inline code snippet
 vim.keymap.set('n', '<leader>m`', [[ciW`<c-r>"`<esc>]])
+vim.keymap.set('v', '<leader>m`', [[c`<c-r>"`<esc>]])
 
 
+-- Helper function to align markdown tables
 local function align_table_lines(lines)
   local parsed = {}
   for _, line in ipairs(lines) do
@@ -85,13 +97,14 @@ local function format_table(start_row, end_row)
   vim.api.nvim_buf_set_lines(0, start_row - 1, end_row, false, aligned)
 end
 
+-- Expose the above functions as a Neovim command
+vim.api.nvim_buf_create_user_command(0, 'MDAlignTable', function(opts) format_table(opts.line1, opts.line2) end,
+  { range = true })
+
+-- Keymaps to align markdown tables
 vim.keymap.set('n', '<leader>ma', function()
   local s, e = table_range()
   format_table(s, e)
 end, { buffer = true, desc = 'Align markdown table' })
-
-vim.api.nvim_buf_create_user_command(0, 'MDAlignTable', function(opts)
-  format_table(opts.line1, opts.line2)
-end, { range = true })
-
-vim.keymap.set('v', '<leader>ma', ':MDAlignTable<CR>', { buffer = true, silent = true, desc = 'Align markdown table (selection)' })
+vim.keymap.set('v', '<leader>ma', ':MDAlignTable<CR>',
+  { buffer = true, silent = true, desc = 'Align markdown table (selection)' })
