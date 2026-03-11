@@ -238,6 +238,11 @@ require("lazy").setup({
     },
     config = function()
       require("fzf-lua").setup({
+        winopts = {
+          preview = {
+            layout = "vertical", -- Results/preview panes over/under, rather than side-by-side.
+          },
+        },
         keymap = {
           fzf = {
             ["ctrl-q"] = "select-all+accept",
