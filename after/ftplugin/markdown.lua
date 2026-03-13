@@ -1,19 +1,17 @@
+local function create_wrapper_mappings(lhs, left, right)
+  right = right or left
+  vim.keymap.set('n', lhs, ('ciW%s<c-r>"%s<esc>'):format(left, right))
+  vim.keymap.set('v', lhs, ('c%s<c-r>"%s<esc>'):format(left, right))
+end
+
+-- Keymaps for wrapping word or selection with characters
+create_wrapper_mappings('<leader>mb', '**')
+create_wrapper_mappings('<leader>mi', '*')
+create_wrapper_mappings('<leader>m`', '`')
+
 -- Turn word/selection into a link
 vim.keymap.set('n', '<leader>mk', [[ciW[<c-r>"]()<left>]])
 vim.keymap.set('v', '<leader>mk', [[c[<c-r>"]()<left>]])
-
--- Make word/selection bold
-vim.keymap.set('n', '<leader>mb', [[ciW**<c-r>"**<esc>]])
-vim.keymap.set('v', '<leader>mb', [[c**<c-r>"**<esc>]])
-
--- Make word/selection italicized
-vim.keymap.set('n', '<leader>mi', [[ciW*<c-r>"*<esc>]])
-vim.keymap.set('v', '<leader>mi', [[c*<c-r>"*<esc>]])
-
--- Make word/selection an inline code snippet
-vim.keymap.set('n', '<leader>m`', [[ciW`<c-r>"`<esc>]])
-vim.keymap.set('v', '<leader>m`', [[c`<c-r>"`<esc>]])
-
 
 -- Helper function to align markdown tables
 local function align_table_lines(lines)
