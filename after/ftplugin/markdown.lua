@@ -36,10 +36,9 @@ local function align_table_lines(lines)
     if cells then
       for i, cell in ipairs(cells) do
         local w = vim.fn.strdisplaywidth(cell)
-        if cell:match('^:?-+:?$') then
-          w = math.max(w, 3)
+        if not cell:match('^:?-+:?$') then
+          widths[i] = math.max(widths[i] or 0, w)
         end
-        widths[i] = math.max(widths[i] or 0, w)
       end
     end
   end
@@ -51,27 +50,33 @@ local function align_table_lines(lines)
       table.insert(result, line)
     else
       local parts = {}
+      local is_separator = false
       for j, cell in ipairs(cells) do
         local w = widths[j] or vim.fn.strdisplaywidth(cell)
         local padded
         if cell:match('^:?-+:?$') then
+          is_separator = true
           local lc = cell:sub(1, 1) == ':'
           local rc = cell:sub(-1) == ':'
           if lc and rc then
-            padded = ':' .. string.rep('-', w - 2) .. ':'
+            padded = ':' .. string.rep('-', w) .. ':'
           elseif lc then
-            padded = ':' .. string.rep('-', w - 1)
+            padded = ':' .. string.rep('-', w + 1)
           elseif rc then
-            padded = string.rep('-', w - 1) .. ':'
+            padded = string.rep('-', w + 1) .. ':'
           else
-            padded = string.rep('-', w)
+            padded = string.rep('-', w + 2)
           end
         else
           padded = cell .. string.rep(' ', w - vim.fn.strdisplaywidth(cell))
         end
         table.insert(parts, padded)
       end
-      table.insert(result, '| ' .. table.concat(parts, ' | ') .. ' |')
+      if is_separator then
+        table.insert(result, '|' .. table.concat(parts, '|') .. '|')
+      else
+        table.insert(result, '| ' .. table.concat(parts, ' | ') .. ' |')
+      end
     end
   end
   return result
