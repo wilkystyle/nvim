@@ -50,6 +50,7 @@ vim.opt.clipboard:append { "unnamed", "unnamedplus" } -- Use system clipboard by
 vim.opt.hlsearch = true                               -- Highlight matches while searching
 vim.opt.ignorecase = true                             -- Ignore case while searching, by default
 vim.opt.incsearch = true                              -- Enable incremental search by default
+vim.opt.smartcase = true                              -- Smart case search: Care about case only if one or more uppercase letters are present
 
 vim.opt.expandtab = true                              -- Use spaces by default instead of tabs
 vim.opt.tabstop = 4                                   -- How wide a tab looks when displayed
