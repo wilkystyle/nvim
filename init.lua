@@ -312,35 +312,22 @@ require("lazy").setup({
 
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = 'master',
     lazy = false, -- We want treesitter highlighting to be available immediately for all applicable filetypes
     build = ":TSUpdate",
     config = function()
-      require 'nvim-treesitter.configs'.setup {
-        indent = { enable = true, disable = { "markdown" } },
-        ensure_installed = {
-          "bash",
-          "c",
-          "dockerfile",
-          "javascript",
-          "lua",
-          "markdown",
-          "markdown_inline",
-          "python",
-          "query",
-          "rust",
-          "sql",
-          "toml",
-          "typescript",
-          "vim",
-          "vimdoc",
-          "yaml",
-        },
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-      }
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function() pcall(vim.treesitter.start) end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function()
+          if vim.bo.filetype ~= 'markdown' then
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
     end,
   },
 

@@ -1,7 +1,7 @@
 # August 2025 Neovim config rebuild
 
 ## Prerequisites
-- `nvim` 0.11.4-ish (definitely doesn't work on <0.10.0)
+- `nvim` 0.12.2+ (nvim-treesitter configuration has been updated to use `main` branch, which is not compatible with Neovim <0.12)
 - A compiler + dev headers/libraries for compiling Treesitter parser binaries, for example:
     - `apt install build-essential` on Ubuntu
     - [MSVC](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line) on Windows
