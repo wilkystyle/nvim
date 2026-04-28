@@ -311,24 +311,31 @@ require("lazy").setup({
   },
 
   {
-    "nvim-treesitter/nvim-treesitter",
-    lazy = false, -- We want treesitter highlighting to be available immediately for all applicable filetypes
-    build = ":TSUpdate",
+    "romus204/tree-sitter-manager.nvim",
+    dependencies = {}, -- tree-sitter CLI must be installed system-wide: brew install tree-sitter-cli
     config = function()
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = '*',
-        callback = function() pcall(vim.treesitter.start) end,
-      })
-
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = '*',
-        callback = function()
-          if vim.bo.filetype ~= 'markdown' then
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
-        end,
-      })
-    end,
+      require("tree-sitter-manager").setup({
+          ensure_installed = {
+            "bash",
+            "c",
+            "dockerfile",
+            "javascript",
+            "lua",
+            "markdown",
+            "markdown_inline",
+            "python",
+            "query",
+            "rust",
+            "sql",
+            "toml",
+            "typescript",
+            "vim",
+            "vimdoc",
+            "yaml",
+          },
+          auto_install = true, -- Auto-install parsers when editing a file that doesn't have a parser already installed.
+        })
+    end
   },
 
   {
