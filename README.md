@@ -1,11 +1,14 @@
-# August 2025 Neovim config rebuild
+# My Neovim configuration
+This is the result of a complete rebuild of my Neovim configuration from the ground up, back in August 2025. This configuration is built around the Lazy.nvim plugin manager.
 
 ## Prerequisites
-- `nvim` 0.12.2+ (nvim-treesitter configuration has been updated to use `main` branch, which is not compatible with Neovim <0.12)
+- `nvim` 0.12.2+
 - A compiler + dev headers/libraries for compiling Treesitter parser binaries, for example:
     - `apt install build-essential` on Ubuntu
     - [MSVC](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line) on Windows
-
+- `tree-sitter-cli`, which can be installed via one of the following:
+    - `brew install tree-sitter-cli`
+    - `cargo binstall tree-sitter-cli` (per [the official docs](https://github.com/tree-sitter/tree-sitter/tree/master/crates/cli#installation))
 
 ## Installation
 **Linux/macOS**
