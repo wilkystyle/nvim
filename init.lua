@@ -269,7 +269,7 @@ require("lazy").setup({
         "<leader>t",
         function()
           require("fzf-lua").grep({
-            search = "^ *(async )?(class|def(fun)?|fu?n(c|ction)?) _?",
+            search = "^ *(async )?(class|\\(?def(un)?|fu?n(c|ction)?) _?",
             no_esc = true,
             rg_glob = true
           })
