@@ -344,26 +344,26 @@ require("lazy").setup({
     dependencies = {}, -- tree-sitter CLI must be installed system-wide: brew install tree-sitter-cli
     config = function()
       require("tree-sitter-manager").setup({
-          ensure_installed = {
-            "bash",
-            "c",
-            "dockerfile",
-            "javascript",
-            "lua",
-            "markdown",
-            "markdown_inline",
-            "python",
-            "query",
-            "rust",
-            "sql",
-            "toml",
-            "typescript",
-            "vim",
-            "vimdoc",
-            "yaml",
-          },
-          auto_install = true, -- Auto-install parsers when editing a file that doesn't have a parser already installed.
-        })
+        ensure_installed = {
+          "bash",
+          "c",
+          "dockerfile",
+          "javascript",
+          "lua",
+          "markdown",
+          "markdown_inline",
+          "python",
+          "query",
+          "rust",
+          "sql",
+          "toml",
+          "typescript",
+          "vim",
+          "vimdoc",
+          "yaml",
+        },
+        auto_install = true, -- Auto-install parsers when editing a file that doesn't have a parser already installed.
+      })
     end
   },
 
