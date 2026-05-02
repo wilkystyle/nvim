@@ -297,13 +297,51 @@ require("lazy").setup({
       {
         "<leader>t",
         function()
-          require("fzf-lua").grep({
-            search = "^ *(async )?(class|\\(?def(un)?|fu?n(c|ction)?) _?",
-            no_esc = true,
-            rg_glob = true
+          require("fzf-lua").live_grep({
+            -- The structural pattern (matching class/function definitions) is fixed and
+            -- non-orderless. Any additional terms the user types are applied as orderless
+            -- PCRE lookaheads, so e.g. typing "my_func" narrows results to definitions
+            -- whose line also contains "my_func", in any position.
+            --
+            -- Example: typing "foo bar" matches lines that:
+            --   1. Look like a class/function definition (structural pattern)
+            --   2. Also contain both "foo" AND "bar" anywhere on the line (in any order)
+            --
+            -- NOTE: fn_transform_cmd runs in a headless Neovim process with no upvalue
+            -- access, so the structural pattern must be inlined rather than captured from
+            -- the outer scope.
+            fn_transform_cmd = function(query, cmd, _)
+              if not cmd then return end
+              local struct = "^ *(async )?(class|\\(?def(un)?|fu?n(c|ction)?) _?"
+              local lookaheads
+              if query and #query > 0 then
+                local leading_space = query:sub(1, 1) == " "
+                local terms = {}
+                for term in query:gmatch("%S+") do
+                  table.insert(terms, term)
+                end
+                if leading_space then
+                  -- All terms orderless; structural pattern stands alone
+                  lookaheads = "(?=.*" .. struct .. ")"
+                  for _, term in ipairs(terms) do
+                    lookaheads = lookaheads .. "(?=.*" .. term .. ")"
+                  end
+                else
+                  -- First term appended directly onto structural pattern; rest are orderless
+                  lookaheads = "(?=.*" .. struct .. terms[1] .. ")"
+                  for i = 2, #terms do
+                    lookaheads = lookaheads .. "(?=.*" .. terms[i] .. ")"
+                  end
+                end
+              else
+                lookaheads = "(?=.*" .. struct .. ")"
+              end
+              return cmd .. "'^" .. lookaheads .. "'"
+            end,
+            rg_opts = [[--column --line-number --no-heading --color=always --smart-case -P --max-columns=4096 -g "!.git" -e]],
           })
         end,
-        desc = "grep/fuzzy-find in project with fzf"
+        desc = "Fuzzy-find class/function definitions in project with fzf"
       },
     },
   },
