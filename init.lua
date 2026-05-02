@@ -256,9 +256,38 @@ require("lazy").setup({
       })
     end,
     keys = {
-      { "gd",        function() require("fzf-lua").lsp_definitions() end,             desc = "Goto LSP definitions using fzf" },
-      { "grr",       function() require("fzf-lua").lsp_references() end,              desc = "Goto LSP references using fzf" },
-      { "<leader>f", function() require("fzf-lua").live_grep() end,                   desc = "(rip)grep in project with fzf" },
+      { "gd",  function() require("fzf-lua").lsp_definitions() end, desc = "Goto LSP definitions using fzf" },
+      { "grr", function() require("fzf-lua").lsp_references() end,  desc = "Goto LSP references using fzf" },
+      {
+        "<leader>f",
+        function()
+          require("fzf-lua").live_grep({
+            -- PCRE zero-length lookaheads allow us to do an orderless regex search:
+            --
+            -- We'll split on spaces so that each space-delimited term is a
+            -- self-contained regex, and then each regex can occur in any
+            -- order.
+            --
+            -- Example:
+            --     The search term "foo bar" becomes the command `rg -P '^(?=.*foo)(?=.*bar)'`
+            --
+            fn_transform_cmd = function(query, cmd, _)
+              if not cmd then return end
+              if query and #query > 0 then
+                local lookaheads = ""
+                for term in query:gmatch("%S+") do
+                  lookaheads = lookaheads .. "(?=.*" .. term .. ")"
+                end
+                return cmd .. "'^" .. lookaheads .. "'"
+              end
+              return cmd .. query
+            end,
+            rg_opts =
+            [[--column --line-number --no-heading --color=always --smart-case -P --max-columns=4096 -g "!.git" -e]],
+          })
+        end,
+        desc = "Orderless ripgrep in project with fzf"
+      },
       { "<leader>h", function() require("fzf-lua").helptags() end,                    desc = "Fuzzy search Neovim help topics with fzf" },
       { "<leader>l", function() require('fzf-lua').blines({ previewer = false }) end, desc = "Fuzzy find lines in current buffer with fzf" },
       { "<leader>p", function() require("fzf-lua").files() end,                       desc = "Fuzzy-find files using fzf" },
