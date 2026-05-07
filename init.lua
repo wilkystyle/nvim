@@ -134,22 +134,21 @@ require("lazy").setup({
     config = function()
       require("tokyonight").setup({
         on_colors = function(colors)
-          -- Set base colors from your Emacs theme
-          colors.bg = "#1a120e"
-          colors.bg_dark = "#432A1E"
+          colors.bg = "#1D1F23"
+          colors.bg_dark = "#2f334d"
 
-          colors.fg = "#F0DFD8"
-          colors.fg_dark = "#D7C2BA"
+          colors.fg = "#EFEFEF"
+          colors.fg_dark = "#c8d3f5"
 
-          colors.comment_grey = "#7C7C7C"
-          colors.cyan = "#9EC3C4"
-          colors.dark_grey = "#4C4C4C"
-          colors.green = "#9EC49F"
-          colors.magenta = "#FFB4AB"
+          colors.comment_grey = "#8888AA"
+          colors.cyan = "#85DAFB"
+          colors.dark_grey = "#2f334d"
+          colors.green = "#9DD274"
+          colors.magenta = "#ff77cc"
           colors.orange = "#FFB694"
-          colors.purple = "#C49EC4"
-          colors.violet = "#A39EC4"
-          colors.yellow = "#C4C19E"
+          colors.purple = "#ffc777"
+          colors.violet = "#BB9CF7"
+          colors.yellow = "#EDCB66"
         end,
 
         on_highlights = function(highlights, colors)
