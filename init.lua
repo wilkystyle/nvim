@@ -274,14 +274,17 @@ require("lazy").setup({
             fn_transform_cmd = function(query, cmd, _)
               if not cmd then return end
               if query and #query > 0 then
+                local q = query:gsub("\\ ", "\1")
                 local lookaheads = ""
-                for term in query:gmatch("%S+") do
-                  lookaheads = lookaheads .. "(?=.*" .. term .. ")"
+                for term in q:gmatch("%S+") do
+                  term = term:gsub("\1", " ")
+                  lookaheads = lookaheads .. "(?=.*" .. term:gsub('"', '\\"') .. ")"
                 end
-                return cmd .. "'^" .. lookaheads .. "'"
+                return cmd .. '"^' .. lookaheads .. '"'
               end
               return cmd .. query
             end,
+            debug = true,
             rg_opts =
             [[--column --line-number --no-heading --color=always --smart-case -P --max-columns=4096 -g "!.git" -e]],
           })
@@ -315,10 +318,11 @@ require("lazy").setup({
               local struct = "^ *(async )?(class|\\(?def(un)?|fu?n(c|ction)?) _?"
               local lookaheads
               if query and #query > 0 then
+                local q = query:gsub("\\ ", "\1")
                 local leading_space = query:sub(1, 1) == " "
                 local terms = {}
-                for term in query:gmatch("%S+") do
-                  table.insert(terms, term)
+                for term in q:gmatch("%S+") do
+                  table.insert(terms, (term:gsub("\1", " "):gsub('"', '\\"')))
                 end
                 if leading_space then
                   -- All terms orderless; structural pattern stands alone
@@ -338,7 +342,9 @@ require("lazy").setup({
               end
               return cmd .. "'^" .. lookaheads .. "'"
             end,
-            rg_opts = [[--column --line-number --no-heading --color=always --smart-case -P --max-columns=4096 -g "!.git" -e]],
+            debug = true,
+            rg_opts =
+            [[--column --line-number --no-heading --color=always --smart-case -P --max-columns=4096 -g "!.git" -e]],
           })
         end,
         desc = "Fuzzy-find class/function definitions in project with fzf"
