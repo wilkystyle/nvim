@@ -284,7 +284,6 @@ require("lazy").setup({
               end
               return cmd .. query
             end,
-            debug = true,
             rg_opts =
             [[--column --line-number --no-heading --color=always --smart-case -P --max-columns=4096 -g "!.git" -e]],
           })
@@ -342,7 +341,6 @@ require("lazy").setup({
               end
               return cmd .. "'^" .. lookaheads .. "'"
             end,
-            debug = true,
             rg_opts =
             [[--column --line-number --no-heading --color=always --smart-case -P --max-columns=4096 -g "!.git" -e]],
           })
