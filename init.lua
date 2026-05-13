@@ -273,16 +273,34 @@ require("lazy").setup({
             --
             fn_transform_cmd = function(query, cmd, _)
               if not cmd then return end
-              if query and #query > 0 then
-                local q = query:gsub("\\ ", "\1")
+              -- Split on " -- " to allow passing extra rg flags (e.g. "-g *.md")
+              local search_query, extra_flags = query or "", ""
+              if query then
+                local split = query:find(" %-%- ")
+                if split then
+                  search_query = query:sub(1, split - 1)
+                  -- Double-quote non-flag tokens to prevent shell glob expansion
+                  local tokens = {}
+                  for token in query:sub(split + 4):gmatch("%S+") do
+                    local first = token:sub(1, 1)
+                    if first ~= "-" and first ~= '"' and first ~= "'" then
+                      token = '"' .. token .. '"'
+                    end
+                    table.insert(tokens, token)
+                  end
+                  extra_flags = " " .. table.concat(tokens, " ")
+                end
+              end
+              if search_query and #search_query > 0 then
+                local q = search_query:gsub("\\ ", "\1")
                 local lookaheads = ""
                 for term in q:gmatch("%S+") do
                   term = term:gsub("\1", " ")
                   lookaheads = lookaheads .. "(?=.*" .. term:gsub('"', '\\"') .. ")"
                 end
-                return cmd .. '"^' .. lookaheads .. '"'
+                return cmd .. '"^' .. lookaheads .. '"' .. extra_flags
               end
-              return cmd .. query
+              return cmd .. search_query .. extra_flags
             end,
             rg_opts =
             [[--column --line-number --no-heading --color=always --smart-case -P --max-columns=4096 -g "!.git" -e]],
