@@ -308,12 +308,12 @@ require("lazy").setup({
         end,
         desc = "Orderless ripgrep in project with fzf"
       },
-      { "<leader>h", function() require("fzf-lua").helptags() end,                    desc = "Fuzzy search Neovim help topics with fzf" },
-      { "<leader>l", function() require('fzf-lua').blines({ previewer = false }) end, desc = "Fuzzy find lines in current buffer with fzf" },
-      { "<leader>p", function() require("fzf-lua").files() end,                       desc = "Fuzzy-find files using fzf" },
-      { "<leader>r", function() require('fzf-lua').resume() end,                      desc = "Resume last fzf picker view" },
-      { "<leader>b", function() require('fzf-lua').buffers() end,                     desc = "Fuzzy search open buffers" },
-      { "<leader>e", function() require('fzf-lua').diagnostics_document() end,        desc = "Show LSP diagnostics for the current buffer" },
+      { "<leader>h", function() require("fzf-lua").helptags() end,             desc = "Fuzzy search Neovim help topics with fzf" },
+      { "<leader>l", function() require('fzf-lua').blines() end,               desc = "Fuzzy find lines in current buffer with fzf" },
+      { "<leader>p", function() require("fzf-lua").files() end,                desc = "Fuzzy-find files using fzf" },
+      { "<leader>r", function() require('fzf-lua').resume() end,               desc = "Resume last fzf picker view" },
+      { "<leader>b", function() require('fzf-lua').buffers() end,              desc = "Fuzzy search open buffers" },
+      { "<leader>e", function() require('fzf-lua').diagnostics_document() end, desc = "Show LSP diagnostics for the current buffer" },
       {
         "<leader>t",
         function()
