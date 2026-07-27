@@ -636,6 +636,17 @@ vim.lsp.config('*', {
   end,
 })
 
+-- Connect to LSP from running Godot IDE
+vim.lsp.config('godot', {
+  cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
+  filetypes = { 'gdscript' },
+  root_markers = { 'project.godot', '.git' },
+  on_attach = function(_, _)
+    vim.api.nvim_command([[echo serverstart(']] .. '/tmp/godot.pipe' .. [[')]])
+  end
+})
+vim.lsp.enable('godot')
+
 
 ----------------------------------------------------------------------------------
 --- KEYBINDINGS
