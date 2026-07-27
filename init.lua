@@ -436,31 +436,38 @@ require("lazy").setup({
   },
 
   {
-    "romus204/tree-sitter-manager.nvim",
-    dependencies = {}, -- tree-sitter CLI must be installed system-wide: brew install tree-sitter-cli
+    'nvim-treesitter/nvim-treesitter',
+    lazy = false,
+    build = ':TSUpdate',
     config = function()
-      require("tree-sitter-manager").setup({
-        ensure_installed = {
-          "bash",
-          "c",
-          "dockerfile",
-          "javascript",
-          "lua",
-          "markdown",
-          "markdown_inline",
-          "python",
-          "query",
-          "rust",
-          "sql",
-          "toml",
-          "typescript",
-          "vim",
-          "vimdoc",
-          "yaml",
-        },
-        auto_install = true, -- Auto-install parsers when editing a file that doesn't have a parser already installed.
+      -- The `main` branch dropped `ensure_installed`; parsers are installed by
+      -- calling install() directly. Runs async, and is a no-op for parsers
+      -- that are already present.
+      require('nvim-treesitter').install {
+        'bash', 'c', 'csv', 'dockerfile', 'gitcommit', 'gitignore', 'go',
+        'gomod', 'gosum', 'gowork', 'hcl', 'javascript', 'json', 'lua',
+        'markdown', 'markdown_inline', 'python', 'query', 'rust', 'sql',
+        'terraform', 'toml', 'tsv', 'typescript', 'vim', 'vimdoc', 'yaml',
+      }
+
+      -- Enable treesitter highlighting for all filetypes. pcall swallows
+      -- errors, so unsupported filetypes silently fall back to the built-in
+      -- regex syntax rules.
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function() pcall(vim.treesitter.start) end,
       })
-    end
+      -- Use treesitter for indentation, except for Markdown (use built-in
+      -- indent rules). Can't remember why I did this.
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function()
+          if vim.bo.filetype ~= 'markdown' then
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
+    end,
   },
 
   {
