@@ -396,7 +396,7 @@ require("lazy").setup({
       { "<leader><cr>", "<Plug>SlimeParagraphSend" },
       { "<leader><cr>", "<Plug>SlimeRegionSend",   mode = "v" },
       {
-        "<leader>as",
+        "<leader>cs",
         function()
           vim.cmd("normal! vip")
           slime_send_visual()
@@ -404,7 +404,7 @@ require("lazy").setup({
         desc = "Send paragraph (with file:line header) to tmux pane via vim-slime, without a trailing Enter",
       },
       {
-        "<leader>as",
+        "<leader>cs",
         function() slime_send_visual() end,
         mode = "v",
         desc = "Send visual line selection (with file:line header) to tmux pane via vim-slime, without a trailing Enter",
