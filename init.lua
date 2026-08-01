@@ -444,10 +444,34 @@ require("lazy").setup({
       -- calling install() directly. Runs async, and is a no-op for parsers
       -- that are already present.
       require('nvim-treesitter').install {
-        'bash', 'c', 'csv', 'dockerfile', 'gitcommit', 'gitignore', 'go',
-        'gomod', 'gosum', 'gowork', 'hcl', 'javascript', 'json', 'lua',
-        'markdown', 'markdown_inline', 'python', 'query', 'rust', 'sql',
-        'terraform', 'toml', 'tsv', 'typescript', 'vim', 'vimdoc', 'yaml',
+        'bash',
+        'c',
+        'csv',
+        'dockerfile',
+        'gitcommit',
+        'gitignore',
+        'go',
+        'gomod',
+        'gosum',
+        'gowork',
+        'hcl',
+        'html',
+        'javascript',
+        'json',
+        'lua',
+        'markdown',
+        'markdown_inline',
+        'python',
+        'query',
+        'rust',
+        'sql',
+        'terraform',
+        'toml',
+        'tsv',
+        'typescript',
+        'vim',
+        'vimdoc',
+        'yaml',
       }
 
       -- Enable treesitter highlighting for all filetypes. pcall swallows
