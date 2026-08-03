@@ -420,6 +420,24 @@ require("lazy").setup({
   },
 
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "mason-org/mason.nvim" },
+    opts = {
+      ensure_installed = {
+        "deno",
+        "gopls",
+        "lua-language-server",
+        "ruff",
+        "rust-analyzer",
+        "shellcheck",
+        "terraform-ls",
+        "ty",
+        "vtsls",
+      },
+    },
+  },
+
+  {
     "mason-org/mason-lspconfig.nvim",
     lazy = false, -- Or it won't attach an LSP server and start indexing when you open a file
     opts = {},
