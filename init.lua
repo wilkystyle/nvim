@@ -424,9 +424,9 @@ require("lazy").setup({
     dependencies = { "mason-org/mason.nvim" },
     opts = {
       ensure_installed = {
-        "deno",
         "gopls",
         "lua-language-server",
+        "prettier",
         "ruff",
         "rust-analyzer",
         "shellcheck",
@@ -550,6 +550,7 @@ require("lazy").setup({
         -- Use `:help formatters` to see a list of builtin formatters
         formatters_by_ft = {
           go = { "gofmt" },
+          javascript = { "prettier" },
           python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
           terraform = { "tofu_fmt" },
         },
