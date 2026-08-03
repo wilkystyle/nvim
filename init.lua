@@ -40,6 +40,8 @@ end, { expr = true, noremap = true })
 ----------------------------------------------------------------------------------
 --- OPTIONS
 ----------------------------------------------------------------------------------
+vim.opt.splitright = true                             -- New vertical splits should appear on the right, not the left!
+
 vim.opt.laststatus = 0                                -- Don't show the statusline
 vim.opt.showmode = false                              -- Don't show the mode in the message area
 vim.opt.ruler = false                                 -- Don't show line,col or position in file
