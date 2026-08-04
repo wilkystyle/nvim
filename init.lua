@@ -466,6 +466,7 @@ require("lazy").setup({
       require('nvim-treesitter').install {
         'bash',
         'c',
+        'css',
         'csv',
         'dockerfile',
         'gitcommit',
