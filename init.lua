@@ -716,9 +716,9 @@ vim.keymap.set('n', '<leader>`', function()
   local dir = require("oil").get_current_dir() or vim.fn.expand('%:p:h')
   local shell = vim.fn.has('win32') == 1 and 'powershell' or ''
   if string.match(dir, "fugitive://") then
-    vim.cmd('vsplit | wincmd w | terminal ' .. shell)
+    vim.cmd('vsplit | terminal ' .. shell)
   else
-    vim.cmd('vsplit | wincmd w | lcd ' .. vim.fn.fnameescape(dir) .. ' | terminal ' .. shell)
+    vim.cmd('vsplit | lcd ' .. vim.fn.fnameescape(dir) .. ' | terminal ' .. shell)
   end
   vim.cmd('startinsert')
 end, { desc = "Open a terminal in a side split, in the same directory as the current buffer" })
