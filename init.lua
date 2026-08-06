@@ -794,6 +794,11 @@ slime_send_visual = function()
   local text = string.format("\n\n%s\n```\n%s\n```", header, table.concat(lines, "\n"))
   vim.fn["slime#send"](text)
 
+  -- Change focus to the tmux pane where we just sent the text
+  if vim.env.TMUX then
+    vim.fn.system("tmux last-pane")
+  end
+
   -- Neither `:normal! vip` nor a visual-mode keymap callback leaves Visual
   -- mode on its own, so do it explicitly to clear the selection highlight.
   vim.cmd("normal! \27")
