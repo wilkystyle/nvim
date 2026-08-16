@@ -67,6 +67,8 @@ vim.opt.linebreak = true                              -- Wrap lines at whole wor
 
 vim.g.mapleader = " "                                 -- Set space as the leader key
 
+vim.cmd.colorscheme("mike-adonis-darker")             -- My custom colorscheme
+
 
 ----------------------------------------------------------------------------------
 --- AUTOCMDS
@@ -133,110 +135,6 @@ require("lazy").setup({
     }
   },
 
-
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,    -- We want the theme to be immediately available!
-    priority = 1000, -- Load the theme before any other plugins
-    config = function()
-      require("tokyonight").setup({
-        on_colors = function(colors)
-          -- Set base colors from your Emacs theme
-          colors.bg = "#1a120e"
-          colors.bg_dark = "#432A1E"
-
-          colors.fg = "#F0DFD8"
-          colors.fg_dark = "#D7C2BA"
-
-          colors.comment_grey = "#7C7C7C"
-          colors.cyan = "#9EC3C4"
-          colors.dark_grey = "#4C4C4C"
-          colors.green = "#9EC49F"
-          colors.magenta = "#FFB4AB"
-          colors.orange = "#FFB694"
-          colors.purple = "#C49EC4"
-          colors.violet = "#A39EC4"
-          colors.yellow = "#C4C19E"
-        end,
-
-        on_highlights = function(highlights, colors)
-          highlights.String = { fg = colors.yellow }
-          highlights.Function = { fg = colors.green }
-          highlights.Keyword = { fg = colors.magenta }
-          highlights.Constant = { fg = colors.violet }
-          highlights.Number = { fg = colors.orange }
-          highlights.Boolean = { fg = colors.violet }
-          highlights.Operator = { fg = colors.cyan }
-          highlights.Type = { fg = colors.orange }
-          highlights.Variable = { fg = colors.orange }
-          highlights.Comment = { fg = colors.comment_grey }
-          highlights.StatusLine = { fg = colors.fg_dark }
-
-          highlights["@variable.member"] = { fg = colors.orange }
-          highlights["@keyword.function"] = { fg = colors.magenta }
-          highlights["@keyword.import"] = { fg = colors.magenta }
-          highlights["@module"] = { fg = colors.orange }
-          highlights["@constant.builtin"] = { fg = colors.purple }
-
-          highlights.LineNr = { fg = colors.fg_dark }
-          highlights.LineNrAbove = { fg = colors.dark_grey }
-          highlights.LineNrBelow = { fg = colors.dark_grey }
-          highlights.CursorLineNr = { fg = colors.fg_dark }
-
-          highlights.CursorLine = { bg = colors.bg }
-
-          highlights.TabLine = {
-            bg = colors.bg,
-            fg = colors.dark_grey
-          }
-
-          highlights.TabLineSel = {
-            bg = colors.bg,
-            fg = colors.fg
-          }
-
-          highlights.TabLineFill = {
-            bg = colors.bg,
-          }
-
-          highlights.Search = {
-            bg = colors.yellow,
-            fg = colors.bg
-          }
-
-          highlights.CurSearch = {
-            bg = colors.orange,
-            fg = colors.bg
-          }
-
-          highlights.IncSearch = {
-            bg = colors.yellow,
-            fg = colors.bg
-          }
-
-          highlights.SpellBad = {
-            bg = colors.magenta,
-            fg = colors.bg,
-          }
-
-          highlights.SpellCap = {
-            bg = colors.yellow,
-          }
-
-          highlights.SpellRare = {
-            bg = colors.cyan,
-          }
-
-          highlights.SpellLocal = {
-            bg = colors.purple,
-          }
-        end
-      })
-
-      -- Load theme only after all customizations have been made
-      vim.cmd.colorscheme("tokyonight-moon")
-    end
-  },
 
   {
     "ibhagwan/fzf-lua",
@@ -318,6 +216,7 @@ require("lazy").setup({
       { "<leader>h", function() require("fzf-lua").helptags() end,                       desc = "Fuzzy search Neovim help topics with fzf" },
       { "<leader>l", function() require('fzf-lua').blines({ show_quickfix = true }) end, desc = "Fuzzy find lines in current buffer with fzf" },
       { "<leader>p", function() require("fzf-lua").files() end,                          desc = "Fuzzy-find files using fzf" },
+
       { "<leader>r", function() require('fzf-lua').resume() end,                         desc = "Resume last fzf picker view" },
       { "<leader>b", function() require('fzf-lua').buffers() end,                        desc = "Fuzzy search open buffers" },
       { "<leader>e", function() require('fzf-lua').diagnostics_document() end,           desc = "Show LSP diagnostics for the current buffer" },
@@ -530,8 +429,6 @@ require("lazy").setup({
         trim_scope = 'outer',
         zindex = 20,
       })
-      vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
-      vim.api.nvim_set_hl(0, "TreesitterContextSeparator", { link = "LineNr" })
     end
   },
 
