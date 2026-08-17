@@ -158,6 +158,27 @@ require("lazy").setup({
           hidden = true,
           rg_opts = [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 -g "!.git" -e]],
         },
+        files = {
+          actions = {
+            ["alt-w"] = {
+              fn = function(selected, opts)
+                local path = require("fzf-lua.path")
+                local cwd = opts.cwd or opts._cwd
+
+                local paths = vim.tbl_map(function(line)
+                  local file = path.entry_to_file(line, opts)
+                  return path.relative_to(file.path, cwd)
+                end, selected)
+
+                vim.fn.setreg("+", table.concat(paths, "\n"), "v")
+              end,
+
+              -- Copy without closing the picker.
+              exec_silent = true,
+              desc = "copy selected paths",
+            },
+          },
+        },
       })
     end,
     keys = {
