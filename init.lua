@@ -472,6 +472,8 @@ require("lazy").setup({
         formatters_by_ft = {
           go = { "gofmt" },
           javascript = { "prettier" },
+          typescript = { "prettier" },
+          html = { "prettier" },
           python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
           terraform = { "tofu_fmt" },
         },
