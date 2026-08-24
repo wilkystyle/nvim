@@ -618,8 +618,8 @@ vim.lsp.enable('godot')
 --- KEYBINDINGS
 ----------------------------------------------------------------------------------
 vim.keymap.set("i", "<c-f>", "<right>", {})                                 -- Make ctrl-f move one character forward in insert mode
-vim.keymap.set("n", "<leader>W", "<cmd>let @+ = expand(\"%:p\")<cr>", {})   -- Copy the full path to the current file
-vim.keymap.set("n", "<leader>w", "<cmd>let @+ = expand(\"%:~:.\")<cr>", {}) -- Copy path to current file, relative to repo root
+vim.keymap.set("n", "<leader>W", '<cmd>let @+ = expand("%:p") | echo "Copied " . @+ . " to the clipboard"<cr>', {})   -- Copy the full path to the current file
+vim.keymap.set("n", "<leader>w", '<cmd>let @+ = expand("%:~:.") | echo "Copied " . @+ . " to the clipboard"<cr>', {}) -- Copy path to current file, relative to repo root
 vim.keymap.set("n", "[q", "<cmd>cprev<cr>", {})                             -- Previous quickfix item
 vim.keymap.set("n", "]q", "<cmd>cnext<cr>", {})                             -- Next quickfix item
 vim.keymap.set("n", "Y", "yy", {})                                          -- Yank whole line when pressing shift-y
