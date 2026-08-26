@@ -617,16 +617,16 @@ vim.lsp.enable('godot')
 ----------------------------------------------------------------------------------
 --- KEYBINDINGS
 ----------------------------------------------------------------------------------
-vim.keymap.set("i", "<c-f>", "<right>", {})                                 -- Make ctrl-f move one character forward in insert mode
+vim.keymap.set("i", "<c-f>", "<right>", {})                                                                           -- Make ctrl-f move one character forward in insert mode
 vim.keymap.set("n", "<leader>W", '<cmd>let @+ = expand("%:p") | echo "Copied " . @+ . " to the clipboard"<cr>', {})   -- Copy the full path to the current file
 vim.keymap.set("n", "<leader>w", '<cmd>let @+ = expand("%:~:.") | echo "Copied " . @+ . " to the clipboard"<cr>', {}) -- Copy path to current file, relative to repo root
-vim.keymap.set("n", "[q", "<cmd>cprev<cr>", {})                             -- Previous quickfix item
-vim.keymap.set("n", "]q", "<cmd>cnext<cr>", {})                             -- Next quickfix item
-vim.keymap.set("n", "Y", "yy", {})                                          -- Yank whole line when pressing shift-y
-vim.keymap.set("n", "ZA", "<cmd>qa!<cr>", {})                               -- Entirely quit Neovim, discarding all changes, without confirmation
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })             -- Allow pressing Esc in the Neovim terminal to return to normal mode
-vim.keymap.set({ "n", "v" }, "<C-j>", "6gj", {})                            -- Move down by 6 lines
-vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                            -- Move up by 6 lines
+vim.keymap.set("n", "[q", "<cmd>cprev<cr>", {})                                                                       -- Previous quickfix item
+vim.keymap.set("n", "]q", "<cmd>cnext<cr>", {})                                                                       -- Next quickfix item
+vim.keymap.set("n", "Y", "yy", {})                                                                                    -- Yank whole line when pressing shift-y
+vim.keymap.set("n", "ZA", "<cmd>qa!<cr>", {})                                                                         -- Entirely quit Neovim, discarding all changes, without confirmation
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })                                                       -- Allow pressing Esc in the Neovim terminal to return to normal mode
+vim.keymap.set({ "n", "v" }, "<C-j>", "6gj", {})                                                                      -- Move down by 6 lines
+vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                                                                      -- Move up by 6 lines
 
 
 ---------------------------------------------------------------------------------
