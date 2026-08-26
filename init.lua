@@ -352,7 +352,7 @@ require("lazy").setup({
         "ruff",
         "rust-analyzer",
         "shellcheck",
-        "tofu-ls",
+        "terraform-ls", -- Would prefer tofu-ls, but it doesn't handle .tfvars files
         "ty",
         "vtsls",
       },
