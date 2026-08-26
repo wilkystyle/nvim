@@ -352,7 +352,7 @@ require("lazy").setup({
         "ruff",
         "rust-analyzer",
         "shellcheck",
-        "terraform-ls",
+        "tofu-ls",
         "ty",
         "vtsls",
       },
