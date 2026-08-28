@@ -162,6 +162,18 @@ require("lazy").setup({
         },
         files = {
           actions = {
+            ["alt-o"] = {
+              fn = function(selected, opts)
+                local path = require("fzf-lua.path")
+                local file = path.entry_to_file(selected[1], opts)
+                local directory = file.path and path.parent(file.path, true)
+
+                if directory then
+                  vim.cmd.edit(vim.fn.fnameescape(directory))
+                end
+              end,
+              desc = "open selected file's directory",
+            },
             ["alt-w"] = {
               fn = function(selected, opts)
                 local path = require("fzf-lua.path")
