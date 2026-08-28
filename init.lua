@@ -177,6 +177,7 @@ require("lazy").setup({
 
               -- Copy without closing the picker.
               exec_silent = true,
+              header = "copy selected paths",
               desc = "copy selected paths",
             },
           },
