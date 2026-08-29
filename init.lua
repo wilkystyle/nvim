@@ -406,6 +406,7 @@ require("lazy").setup({
         'dockerfile',
         'gitcommit',
         'gitignore',
+        'glsl',
         'go',
         'gomod',
         'gosum',
@@ -427,6 +428,8 @@ require("lazy").setup({
         'typescript',
         'vim',
         'vimdoc',
+        'wgsl',
+        'wgsl_bevy',
         'yaml',
       }
 
