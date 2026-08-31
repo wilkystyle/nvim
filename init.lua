@@ -73,6 +73,12 @@ vim.cmd.colorscheme("mike-adonis-darker")             -- My custom colorscheme
 
 
 ----------------------------------------------------------------------------------
+--- FILETYPES
+----------------------------------------------------------------------------------
+vim.filetype.add({ filename = { Caddyfile = 'caddy' } })
+
+
+----------------------------------------------------------------------------------
 --- AUTOCMDS
 ----------------------------------------------------------------------------------
 vim.api.nvim_create_autocmd('BufWritePre', { pattern = '', command = ":%s/\\s\\+$//e" }) -- Delete trailing spaces on save
