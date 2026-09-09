@@ -379,6 +379,22 @@ return function(c)
     MasonWarning = { fg = c.yellow },
   }
 
+  local markdown_headings = {
+    "#cccccc", -- H1: main-heading-color
+    "#C789EA", -- H2: accent-purple
+    "#3DD9DA", -- H3: accent-green
+    "#C789EA", -- H4: heading-color
+    "#908caa", -- H5: muted-color
+    "#908caa", -- H6: muted-color
+  }
+
+  for level, color in ipairs(markdown_headings) do
+    local group = "markdownH" .. level
+    h[group] = { fg = color, bold = true }
+    h[group .. "Delimiter"] = { link = group }
+    h["@markup.heading." .. level .. ".markdown"] = { link = group }
+  end
+
   -- Aerial and completion both use LSP-style symbol kinds.
   local kinds = {
     Array = c.orange,
