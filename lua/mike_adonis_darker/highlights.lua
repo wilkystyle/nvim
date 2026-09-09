@@ -380,7 +380,7 @@ return function(c)
   }
 
   local markdown_headings = {
-    "#cccccc", -- H1: main-heading-color
+    "#EE7287", -- H1: main-heading-color
     "#C789EA", -- H2: accent-purple
     "#3DD9DA", -- H3: accent-green
     "#C789EA", -- H4: heading-color
