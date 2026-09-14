@@ -410,7 +410,6 @@ require("lazy").setup({
         'css',
         'csv',
         'dockerfile',
-        'gitcommit',
         'gitignore',
         'glsl',
         'go',
