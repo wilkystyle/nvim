@@ -591,9 +591,9 @@ require("lazy").setup({
 
     -- Key mappings (optional)
     keys = {
-      { '<leader>dn',       function() require("dap").step_over() end },
-      { '<leader>di',       function() require("dap").step_into() end },
-      { '<leader>do',       function() require("dap").step_out() end },
+      { '<F10>',            function() require("dap").step_over() end },
+      { '<F11>',            function() require("dap").step_into() end },
+      { '<F12>',            function() require("dap").step_out() end },
       { '<leader>db',       function() require("dap").toggle_breakpoint() end },
       { '<leader>dc',       function() require("dap").toggle_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
       { '<leader>d<bs>',    function() require("dap").clear_breakpoints() end },
@@ -601,9 +601,11 @@ require("lazy").setup({
       { '<leader>d<enter>', function() require("dap").run_to_cursor() end },
       { '<leader>d<esc>',   function() require("dap").terminate() end },
       { '<leader>dd',       function() require("dap").continue() end },
-      { '<leader>dk',       function() require("dapui").eval() end,                                                 mode = { "n", "v" } },
+      { '<leader>di',       function() require("dapui").eval() end,                                                 mode = { "n", "v" } },
       { '<leader>dp',       function() require("dap").pause() end },
       { '<leader>dr',       function() require("dap").repl.toggle() end },
+      { '[f',               function() require("dap").up() end },
+      { ']f',               function() require("dap").down() end },
 
       { '<leader>dt',       function() require('dap-python').test_method({ config = { justMyCode = false } }) end,  ft = "python" },
       { '<leader>dt',       function() require('dap-go').debug_test() end,                                          ft = "go" },
