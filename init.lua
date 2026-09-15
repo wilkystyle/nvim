@@ -653,6 +653,17 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })                 
 vim.keymap.set({ "n", "v" }, "<C-j>", "6gj", {})                                                                      -- Move down by 6 lines
 vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                                                                      -- Move up by 6 lines
 
+---------------------------------------------------------------------------------
+-- Copy entire buffer to clipboard
+---------------------------------------------------------------------------------
+vim.keymap.set("n", "<leader>y", function()
+  local contents = table.concat(
+    vim.api.nvim_buf_get_lines(0, 0, -1, false),
+    "\n"
+  )
+  vim.fn.setreg('+', contents)
+  print("Yanked buffer to clipboard")
+end, { desc = "Yank entire buffer" })
 
 ---------------------------------------------------------------------------------
 -- Open a terminal in a side split, in the same directory as the current buffer
