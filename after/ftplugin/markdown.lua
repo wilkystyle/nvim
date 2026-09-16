@@ -10,8 +10,8 @@ create_wrapper_mappings('<leader>mi', '*')
 create_wrapper_mappings('<leader>m`', '`')
 
 -- Turn word/selection into a link
-vim.keymap.set('n', '<leader>mk', [[ciW[<c-r>"]()<left>]])
-vim.keymap.set('v', '<leader>mk', [[c[<c-r>"]()<left>]])
+vim.keymap.set('n', '<leader>mk', [["zciW[<c-r>z]()<left>]])
+vim.keymap.set('v', '<leader>mk', [["zc[<c-r>z]()<left>]])
 
 -- Align markdown tables
 local function align_table_lines(lines)
