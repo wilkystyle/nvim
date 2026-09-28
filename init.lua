@@ -88,10 +88,6 @@ vim.api.nvim_create_autocmd('BufWritePre', { pattern = '', command = ":%s/\\s\\+
 --- PLUGINS
 ----------------------------------------------------------------------------------
 
--- Forward-declared so the vim-slime keys below can close over it; assigned
--- further down, alongside the other standalone helper functions.
-local slime_send_visual
-
 require("lazy").setup({
   { "cohama/lexima.vim" },               -- Auto-pairing of characters
   { "michaeljsmith/vim-indent-object" }, -- Indentation as a vim text object
@@ -335,19 +331,20 @@ require("lazy").setup({
   {
     'jpalardy/vim-slime',
     keys = {
-      { "<leader><cr>", "<Plug>SlimeParagraphSend" },
+      {
+        "<leader><cr>",
+        function() require("slime_helpers").send_markdown_fence() end,
+        desc = "Send Markdown code fence to tmux pane",
+      },
       { "<leader><cr>", "<Plug>SlimeRegionSend",   mode = "v" },
       {
         "<leader>cs",
-        function()
-          vim.cmd("normal! vip")
-          slime_send_visual()
-        end,
+        function() require("slime_helpers").send_paragraph() end,
         desc = "Send paragraph (with file:line header) to tmux pane via vim-slime, without a trailing Enter",
       },
       {
         "<leader>cs",
-        function() slime_send_visual() end,
+        function() require("slime_helpers").send_visual() end,
         mode = "v",
         desc = "Send visual line selection (with file:line header) to tmux pane via vim-slime, without a trailing Enter",
       },
@@ -729,36 +726,6 @@ vim.keymap.set("n", "<leader>go", function()
   local open_cmd = vim.fn.has('mac') == 1 and 'open' or 'xdg-open'
   vim.fn.system(open_cmd .. " " .. vim.fn.shellescape(url))
 end)
-
-
----------------------------------------------------------------------------------
--- Send the current visual line selection to vim-slime's tmux target pane,
--- wrapped in a `path:line-line` header and a fenced code block, without a
--- trailing Enter
----------------------------------------------------------------------------------
-slime_send_visual = function()
-  local start_line, end_line = vim.fn.line("v"), vim.fn.line(".")
-  if start_line > end_line then
-    start_line, end_line = end_line, start_line
-  end
-
-  local file = vim.fn.expand("%:p")
-  local header = start_line == end_line
-      and string.format("%s:%d", file, start_line)
-      or string.format("%s:%d-%d", file, start_line, end_line)
-  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-  local text = string.format("\n\n%s\n```\n%s\n```", header, table.concat(lines, "\n"))
-  vim.fn["slime#send"](text)
-
-  -- Change focus to the tmux pane where we just sent the text
-  if vim.env.TMUX then
-    vim.fn.system("tmux last-pane")
-  end
-
-  -- Neither `:normal! vip` nor a visual-mode keymap callback leaves Visual
-  -- mode on its own, so do it explicitly to clear the selection highlight.
-  vim.cmd("normal! \27")
-end
 
 
 ---------------------------------------------------------------------------------
