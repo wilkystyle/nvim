@@ -90,7 +90,19 @@ vim.api.nvim_create_autocmd('BufWritePre', { pattern = '', command = ":%s/\\s\\+
 
 require("lazy").setup({
   { "cohama/lexima.vim" },               -- Auto-pairing of characters
-  { "michaeljsmith/vim-indent-object" }, -- Indentation as a vim text object
+  {
+    "michaeljsmith/vim-indent-object", -- Indentation as a vim text object
+    config = function()
+      -- This plugin's select mode bindings interfere with Blink.cmp's snippet
+      -- placeholder fields, which are highlighted in select mode so that you
+      -- can overwrite them as soon as you start typing.
+      --
+      -- Delete all select mode keybindings
+      for _, lhs in ipairs({ "ai", "ii", "aI", "iI" }) do
+        vim.keymap.del("s", lhs)
+      end
+    end,
+  },
   { "scrooloose/nerdtree" },             -- Nerdtree: Sidebar for browsing files
 
   {
