@@ -173,6 +173,9 @@ require("lazy").setup({
           hidden = true,
           rg_opts = [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 -g "!.git" -e]],
         },
+        marks = {
+          marks = "%a",
+        },
         files = {
           actions = {
             ["alt-o"] = {
@@ -212,6 +215,7 @@ require("lazy").setup({
     keys = {
       { "gd",  function() require("fzf-lua").lsp_definitions() end, desc = "Goto LSP definitions using fzf" },
       { "grr", function() require("fzf-lua").lsp_references() end,  desc = "Goto LSP references using fzf" },
+      { "<leader>`", function() require("fzf-lua").marks() end,           desc = "View all marks with fzf" },
       {
         "<leader>f",
         function()
@@ -677,7 +681,7 @@ end, { desc = "Yank entire buffer" })
 ---------------------------------------------------------------------------------
 -- Open a terminal in a side split, in the same directory as the current buffer
 ---------------------------------------------------------------------------------
-vim.keymap.set('n', '<leader>`', function()
+vim.keymap.set('n', '<leader>!', function()
   local dir = require("oil").get_current_dir() or vim.fn.expand('%:p:h')
   local shell = vim.fn.has('win32') == 1 and 'powershell' or ''
   if string.match(dir, "fugitive://") then
