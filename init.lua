@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd('BufWritePre', { pattern = '', command = ":%s/\\s\\+
 ----------------------------------------------------------------------------------
 
 require("lazy").setup({
-  { "cohama/lexima.vim" },               -- Auto-pairing of characters
+  { "cohama/lexima.vim" },             -- Auto-pairing of characters
   {
     "michaeljsmith/vim-indent-object", -- Indentation as a vim text object
     config = function()
@@ -103,7 +103,7 @@ require("lazy").setup({
       end
     end,
   },
-  { "scrooloose/nerdtree" },             -- Nerdtree: Sidebar for browsing files
+  { "scrooloose/nerdtree" }, -- Nerdtree: Sidebar for browsing files
 
   {
     "stevearc/oil.nvim",
@@ -213,8 +213,8 @@ require("lazy").setup({
       })
     end,
     keys = {
-      { "gd",  function() require("fzf-lua").lsp_definitions() end, desc = "Goto LSP definitions using fzf" },
-      { "grr", function() require("fzf-lua").lsp_references() end,  desc = "Goto LSP references using fzf" },
+      { "gd",        function() require("fzf-lua").lsp_definitions() end, desc = "Goto LSP definitions using fzf" },
+      { "grr",       function() require("fzf-lua").lsp_references() end,  desc = "Goto LSP references using fzf" },
       { "<leader>`", function() require("fzf-lua").marks() end,           desc = "View all marks with fzf" },
       {
         "<leader>f",
@@ -352,7 +352,7 @@ require("lazy").setup({
         function() require("slime_helpers").send_markdown_fence() end,
         desc = "Send Markdown code fence to tmux pane",
       },
-      { "<leader><cr>", "<Plug>SlimeRegionSend",   mode = "v" },
+      { "<leader><cr>", "<Plug>SlimeRegionSend", mode = "v" },
       {
         "<leader>cs",
         function() require("slime_helpers").send_paragraph() end,
