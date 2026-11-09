@@ -667,6 +667,24 @@ vim.keymap.set({ "n", "v" }, "<C-j>", "6gj", {})                                
 vim.keymap.set({ "n", "v" }, "<C-k>", "6gk", {})                                                                      -- Move up by 6 lines
 
 ---------------------------------------------------------------------------------
+-- Markdown formatting, but bound globally (e.g. for commit message buffers)
+---------------------------------------------------------------------------------
+local function create_wrapper_mappings(lhs, left, right)
+  right = right or left
+  vim.keymap.set('n', lhs, ('ciW%s<c-r>"%s<esc>'):format(left, right))
+  vim.keymap.set('v', lhs, ('c%s<c-r>"%s<esc>'):format(left, right))
+end
+
+-- Keymaps for wrapping word or selection with characters
+create_wrapper_mappings('<leader>mb', '**')
+create_wrapper_mappings('<leader>mi', '*')
+create_wrapper_mappings('<leader>m`', '`')
+
+-- Turn word/selection into a link
+vim.keymap.set('n', '<leader>mk', [["zciW[<c-r>z]()<left>]])
+vim.keymap.set('v', '<leader>mk', [["zc[<c-r>z]()<left>]])
+
+---------------------------------------------------------------------------------
 -- Copy entire buffer to clipboard
 ---------------------------------------------------------------------------------
 vim.keymap.set("n", "<leader>y", function()

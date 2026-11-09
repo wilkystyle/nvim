@@ -1,18 +1,3 @@
-local function create_wrapper_mappings(lhs, left, right)
-  right = right or left
-  vim.keymap.set('n', lhs, ('ciW%s<c-r>"%s<esc>'):format(left, right))
-  vim.keymap.set('v', lhs, ('c%s<c-r>"%s<esc>'):format(left, right))
-end
-
--- Keymaps for wrapping word or selection with characters
-create_wrapper_mappings('<leader>mb', '**')
-create_wrapper_mappings('<leader>mi', '*')
-create_wrapper_mappings('<leader>m`', '`')
-
--- Turn word/selection into a link
-vim.keymap.set('n', '<leader>mk', [["zciW[<c-r>z]()<left>]])
-vim.keymap.set('v', '<leader>mk', [["zc[<c-r>z]()<left>]])
-
 -- Align markdown tables
 local function align_table_lines(lines)
   local rows = {}
