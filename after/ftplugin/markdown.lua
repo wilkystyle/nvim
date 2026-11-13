@@ -1,3 +1,5 @@
+vim.opt_local.spell = true
+
 -- Align markdown tables
 local function align_table_lines(lines)
   local rows = {}
