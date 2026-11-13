@@ -44,7 +44,7 @@ function M.send_visual()
       and string.format("%s:%d", file, start_line)
       or string.format("%s:%d-%d", file, start_line, end_line)
   local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-  local text = string.format("\n\n%s\n```\n%s\n```", header, table.concat(lines, "\n"))
+  local text = string.format("%s\n```\n%s\n```", header, table.concat(lines, "\n"))
   vim.fn["slime#send"](text)
 
   if vim.env.TMUX then
